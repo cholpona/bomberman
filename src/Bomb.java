@@ -3,11 +3,13 @@ import java.awt.Graphics;
 
 
 
+
+
 public class Bomb extends GameObject{
 	public int range;
 	public boolean removed;
 	public Board board;
-	public static final int MAXTIME=100;
+	public static final int MAXTIME=10;
 	public int counter;
 	public Bomb(int x, int y, Board board, int i){
 		removed=false;
@@ -69,9 +71,18 @@ public class Bomb extends GameObject{
 	}
 
 	public void update() {
-		
+		if(counter>=MAXTIME){
+			
+			//board.fires.add(new Fire(x,y,range));//add fire to board
+			System.out.println("explode at "+this.x+" "+this.y);
+			this.removed=true;
+		}
+		else{
+			counter++;
+		}
 		
 	}
 	
+
 
 }

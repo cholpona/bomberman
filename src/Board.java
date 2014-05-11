@@ -1,8 +1,6 @@
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import listener.KeyboardHandler;
-
 
 
 
@@ -11,6 +9,7 @@ public static final int BLOCKNUMBER=GamePanel.HEIGHT/GameObject.SIZE;
 GameObject[][] board=new GameObject[BLOCKNUMBER][BLOCKNUMBER];
 public ArrayList<Bomb> bombs;
 public ArrayList<Enemy> enemies;
+public ArrayList<Fire> fires;
 public boolean completed;
 
 

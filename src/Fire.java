@@ -59,22 +59,22 @@ public Fire(int x, int y, int range){
 				return true;
 			}
 			if(r >= i || rightBreakable >= i) {
-				if(x == this.x + i && x == this.x+ i && y == this.y&& y == this.y) {
+				if(x == this.x + i  && y == this.y) {
 					return true;
 				}
 			}
 			if(l >= i || leftBreakable >= i) {
-				if(x == this.x- i && x == this.x - i && y == this.y && y == this.y ) {
+				if(x == this.x- i && y == this.y ) {
 					return true;
 				}
 			}
 			if(d >= i || downBreakable >= i) {
-				if(x == this.x  && x == this.x && y == this.y + i && y == this.y + i) {
+				if(x == this.x  && y == this.y + i) {
 					return true;
 				}
 			}
 			if(u >= i || upBreakable >= i) {
-				if(x == this.x  && x == this.x && y == this.y - i && y ==this.y - i) {
+				if(x == this.x  && y ==this.y - i) {
 					return true;
 				}
 			}

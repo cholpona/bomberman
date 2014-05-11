@@ -167,6 +167,7 @@ public class Bomber extends GameObject{
 	private void updateBombs() {
 		for (int i = 0; i <board.bombs.size(); i++) {
 			if(board.bombs.get(i).removed){
+				board.board[board.bombs.get(i).x][board.bombs.get(i).y].changeState(new EmptyBlock());
 				board.bombs.remove(i);
 			}
 		}
