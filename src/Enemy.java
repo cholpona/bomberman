@@ -50,4 +50,11 @@ public class Enemy extends GameObject{
 	
 	}
 
+
+	@Override
+	public boolean fireable() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }

@@ -20,6 +20,7 @@ public abstract  class GameObject{
 	public abstract String toString();
 	public abstract void changeState(BlockState state);
 	public abstract boolean walkable();
+	public abstract boolean fireable();
 	public abstract void draw(Graphics g);
 
 		

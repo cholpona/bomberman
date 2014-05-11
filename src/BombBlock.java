@@ -3,9 +3,11 @@ import java.awt.Graphics;
 
 
 public class BombBlock extends BlockState{
+	
 	Color color;
 	public BombBlock(){
 	this.color=color.BLACK;
+	
 	}
 
 	@Override
@@ -43,6 +45,12 @@ public class BombBlock extends BlockState{
 	@Override
 	Color getColor() {
 		return color;
+	}
+
+	@Override
+	public boolean fireable() {
+		
+		return true;//TODO true mu acaba?
 	}
 
 	

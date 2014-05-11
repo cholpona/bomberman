@@ -19,6 +19,7 @@ public abstract  class BlockState {
 		
 		return walkAble();
 	}
+	public abstract boolean fireable() ;
 	
 }
 

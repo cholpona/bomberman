@@ -43,4 +43,10 @@ public class DoorBlock extends BlockState {
 		return color;
 	}
 
+	@Override
+	public boolean fireable() {
+		
+		return false;
+	}
+
 }

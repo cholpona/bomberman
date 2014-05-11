@@ -187,6 +187,13 @@ public class Bomber extends GameObject{
 	}
 
 
+	@Override
+	public boolean fireable() {
+		
+		return true;
+	}
+
+
 }
 
 

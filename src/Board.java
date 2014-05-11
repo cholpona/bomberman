@@ -22,9 +22,10 @@ public Board(){
 	}
 	enemies=new ArrayList<Enemy>();
 	bombs=new ArrayList<Bomb>();
+	fires=new ArrayList<Fire>();
 	completed=false;
-	board[2][2].changeState(new HardBlock());
-	board[3][3].changeState(new SoftBlock());
+	//board[2][2].changeState(new HardBlock());
+	//board[3][3].changeState(new SoftBlock());
 	
 	
 }
@@ -46,6 +47,10 @@ public void update() {
 		
 		for (int i = 0; i < bombs.size(); i++) {
 			bombs.get(i).update();
+			
+		}
+		for (int i = 0; i < fires.size(); i++) {
+			fires.get(i).update();//TODO is added in the right place
 		}
 		
 }

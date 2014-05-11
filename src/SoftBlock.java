@@ -4,7 +4,7 @@ import java.awt.Color;
 public class SoftBlock extends BlockState{
 	Color color;
 	public SoftBlock(){
-		this.color=color.blue.brighter();
+		this.color=color.gray.darker();
 	}
 
 	@Override
@@ -40,6 +40,12 @@ public class SoftBlock extends BlockState{
 	@Override
 	Color getColor() {
 		return color;
+	}
+
+	@Override
+	public boolean fireable() {
+		
+		return true;
 	}
 
 	

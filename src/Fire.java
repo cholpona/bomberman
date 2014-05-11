@@ -3,36 +3,46 @@ import java.awt.Graphics;
 
 
 public class Fire extends GameObject {
-public int range;
-private int rightBreakable;
-private int r;
-private int leftBreakable;
-private int downBreakable;
-private int upBreakable;
-private int l;
-private int d;
-private int u;
-public Color color;
+	public static final int MAXTIME_FIRE=15;
+	public int range;
+	private int rightFireable;
+	private int r;
+	private int leftFireable;
+	private int downFireable;
+	private int upFireable;
+	private int l;
+	private int d;
+	private int u;
+	public Color color;
+	public int counter;
+	public boolean removed;
+	public Board board;
 
-
-public Fire(int x, int y, int range){
-	this.x=x;
-	this.y=y;
-	this.range=range;
-	this.color=color.ORANGE;
-}
+	public Fire(int x, int y, int range,Board board){
+		this.r=-1;
+		this.l=-1;
+		this.u=-1;
+		this.d=-1;
+		this.x=x;
+		this.y=y;
+		this.range=range;
+		this.color=color.ORANGE;
+		this.counter=10;
+		this.removed=false;
+		this.board=board;
+	}
 
 	@Override
 	public void playerOnMe() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
 	@Override
 	public void fireOnMe() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -44,51 +54,90 @@ public Fire(int x, int y, int range){
 	@Override
 	public void changeState(BlockState state) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public boolean walkable() {
-		
+
 		return true;
 	}
-	public boolean fireCollision(int x, int y){
-		
-		for(int i = 1; i < range; i++) {
-			if(x==this.x&&y==this.y) {
-				return true;
-			}
-			if(r >= i || rightBreakable >= i) {
-				if(x == this.x + i  && y == this.y) {
-					return true;
-				}
-			}
-			if(l >= i || leftBreakable >= i) {
-				if(x == this.x- i && y == this.y ) {
-					return true;
-				}
-			}
-			if(d >= i || downBreakable >= i) {
-				if(x == this.x  && y == this.y + i) {
-					return true;
-				}
-			}
-			if(u >= i || upBreakable >= i) {
-				if(x == this.x  && y ==this.y - i) {
-					return true;
-				}
-			}
-		}
-		
-		return false;
-		
-	}
+
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(color);
-        g.fillOval(x, y, SIZE, SIZE);
-	
-		
+
+
+
+
+	}
+	public void update(){
+		if(counter>=MAXTIME_FIRE){
+			this.removed=true;
+			board.board[x][y].changeState(new EmptyBlock());
+			//change states of softblocks
+			for (int i = 0; i < range; i++) {
+				if(rightFireable <= i) {board.board[x+1][y].changeState(new EmptyBlock());}
+				if(leftFireable  >=i) {board.board[x-1][y].changeState(new EmptyBlock());}
+				if(downFireable == i){board.board[x][y+1].changeState(new EmptyBlock());}
+				if(upFireable==i) {board.board[x][y-1].changeState(new EmptyBlock());}
+
+			}
+
+		}
+		else{
+			counter++;
+			for(int i = 1; i <= range; i++) {
+				if(r == -1) {
+					if(board.board[x+1][y].walkable()) r = i - 1;
+					if(board.board[x+1][y].fireable()) rightFireable = i;
+				}
+				if(l == -1) {
+					if(board.board[x-1][y].walkable()) l = i - 1;
+					if(board.board[x-1][y].fireable()) leftFireable = i;
+				}
+				if(d == -1) {
+					if(board.board[x][y+1].walkable()) d = i - 1;
+					if(board.board[x][y+1].fireable()) downFireable = i;
+				}
+				if(u == -1) {
+					if(board.board[x][y-1].walkable()) u = i - 1;
+					if(board.board[x][y-1].fireable()) upFireable = i;
+				}
+
+				if(i == range) {
+					if(r == -1) r = i;
+					if(l == -1) l = i;
+					if(d == -1) d = i;
+					if(u == -1) u = i;
+				}
+			}
+			board.board[x][y].changeState(new FireState());
+			for(int i = 1; i <= range; i++) {
+				if(r>=i||rightFireable>=i){
+					board.board[x+1][y].changeState(new FireState());
+				}
+				if(l >= i || leftFireable >= i){
+					board.board[x-1][y].changeState(new FireState());
+				}
+				if(d >= i || downFireable >= i){ 
+					board.board[x][y+1].changeState(new FireState());
+				}
+				if(u >= i || upFireable >= i){
+					board.board[x][y-1].changeState(new FireState());
+				}
+
+			}
+
+
+		}
+
+
+	}
+
+	@Override
+	public boolean fireable() {
+
+		return false;// TODO check fireable or not
 	}
 
 }

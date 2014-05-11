@@ -34,9 +34,15 @@ public class GamePanel extends JPanel{
 				if((i%2==0&&j%2==0)||i==0||j==0||i==(WIDTH/SPEED-1)||j==(WIDTH/SPEED-1)){
 					block.changeState(new HardBlock());
 				}
+				else{
+					if(i>=3&&j>=4&&i<23&&j<23){//need parametrize magic numbers here
+						block.changeState(new SoftBlock());
+					}
+				}
 				board.board[i][j]=block;
 			}
 		}
+		
 		
 		//board.board[bomber.x][bomber.y]=bomber;
 		

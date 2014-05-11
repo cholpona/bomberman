@@ -9,7 +9,7 @@ public class Bomb extends GameObject{
 	public int range;
 	public boolean removed;
 	public Board board;
-	public static final int MAXTIME=10;
+	public static final int MAXTIME=20;
 	public int counter;
 	public Bomb(int x, int y, Board board, int i){
 		removed=false;
@@ -60,20 +60,20 @@ public class Bomb extends GameObject{
 	@Override
 	public boolean walkable() {
 		
-		return false;
+		return true;//TODO need to check true or false?
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		 g.setColor(color);
-	     g.fillOval(x*GameObject.SIZE, y*GameObject.SIZE, SIZE, SIZE);
+		 //g.setColor(color);
+	   //  g.fillOval(x*GameObject.SIZE, y*GameObject.SIZE, SIZE, SIZE);
 		
 	}
 
 	public void update() {
 		if(counter>=MAXTIME){
 			
-			//board.fires.add(new Fire(x,y,range));//add fire to board
+			board.fires.add(new Fire(x,y,range,board));//add fire to board
 			System.out.println("explode at "+this.x+" "+this.y);
 			this.removed=true;
 		}
@@ -81,6 +81,12 @@ public class Bomb extends GameObject{
 			counter++;
 		}
 		
+	}
+
+	@Override
+	public boolean fireable() {
+		
+		return true;//TODO check whether true or false
 	}
 	
 

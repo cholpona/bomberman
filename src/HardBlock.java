@@ -40,5 +40,10 @@ public HardBlock(){
 	
 		return color;
 	}
+	@Override
+	public boolean fireable() {
+		
+		return false;
+	}
 
 }
