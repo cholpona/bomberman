@@ -26,7 +26,7 @@ public class BomberGame {
 	        // but we'll use it for its simplicity 
 	        while(true) {
 	            game.update();
-	            Thread.currentThread().sleep(200);
+	            Thread.currentThread().sleep(100);
 	        }
 		
 	}
