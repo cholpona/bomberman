@@ -22,6 +22,7 @@ public abstract  class GameObject{
 	public abstract boolean walkable();
 	public abstract boolean fireable();
 	public abstract void draw(Graphics g);
+	public abstract boolean notFireable();
 
 		
 }

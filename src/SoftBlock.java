@@ -48,5 +48,11 @@ public class SoftBlock extends BlockState{
 		return true;
 	}
 
+	@Override
+	public boolean notFireable() {
+		
+		return false;
+	}
+
 	
 }

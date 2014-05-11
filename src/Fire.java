@@ -76,31 +76,31 @@ public class Fire extends GameObject {
 			board.board[x][y].changeState(new EmptyBlock());
 			//change states of softblocks
 			for (int i = 0; i < range; i++) {
-				if(rightFireable <= i) {board.board[x+1][y].changeState(new EmptyBlock());}
-				if(leftFireable  >=i) {board.board[x-1][y].changeState(new EmptyBlock());}
-				if(downFireable == i){board.board[x][y+1].changeState(new EmptyBlock());}
-				if(upFireable==i) {board.board[x][y-1].changeState(new EmptyBlock());}
+				if(rightFireable > i) {board.board[x+1][y].changeState(new EmptyBlock());}
+				if(leftFireable >i) {board.board[x-1][y].changeState(new EmptyBlock());}
+				if(downFireable > i){board.board[x][y+1].changeState(new EmptyBlock());}
+				if(upFireable>i) {board.board[x][y-1].changeState(new EmptyBlock());}
 
 			}
 
 		}
 		else{
-			counter++;
+			
 			for(int i = 1; i <= range; i++) {
 				if(r == -1) {
-					if(board.board[x+1][y].walkable()) r = i - 1;
+					if(board.board[x+1][y].notFireable()) r = i - 1;
 					if(board.board[x+1][y].fireable()) rightFireable = i;
 				}
 				if(l == -1) {
-					if(board.board[x-1][y].walkable()) l = i - 1;
+					if(board.board[x-1][y].notFireable()) l = i - 1;
 					if(board.board[x-1][y].fireable()) leftFireable = i;
 				}
 				if(d == -1) {
-					if(board.board[x][y+1].walkable()) d = i - 1;
+					if(board.board[x][y+1].notFireable()) d = i - 1;
 					if(board.board[x][y+1].fireable()) downFireable = i;
 				}
 				if(u == -1) {
-					if(board.board[x][y-1].walkable()) u = i - 1;
+					if(board.board[x][y-1].notFireable()) u = i - 1;
 					if(board.board[x][y-1].fireable()) upFireable = i;
 				}
 
@@ -113,20 +113,21 @@ public class Fire extends GameObject {
 			}
 			board.board[x][y].changeState(new FireState());
 			for(int i = 1; i <= range; i++) {
-				if(r>=i||rightFireable>=i){
+				if(r>i||rightFireable>=i){
 					board.board[x+1][y].changeState(new FireState());
 				}
-				if(l >= i || leftFireable >= i){
+				if(l > i || leftFireable >= i){
 					board.board[x-1][y].changeState(new FireState());
 				}
-				if(d >= i || downFireable >= i){ 
+				if(d > i || downFireable >= i){ 
 					board.board[x][y+1].changeState(new FireState());
 				}
-				if(u >= i || upFireable >= i){
+				if(u > i || upFireable >= i){
 					board.board[x][y-1].changeState(new FireState());
 				}
 
 			}
+			counter++;
 
 
 		}
@@ -138,6 +139,12 @@ public class Fire extends GameObject {
 	public boolean fireable() {
 
 		return false;// TODO check fireable or not
+	}
+
+	@Override
+	public boolean notFireable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

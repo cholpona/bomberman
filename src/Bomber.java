@@ -171,6 +171,12 @@ public class Bomber extends GameObject{
 				board.bombs.remove(i);
 			}
 		}
+		for (int i = 0; i < board.fires.size(); i++) {
+			if(board.fires.get(i).removed){
+				board.board[board.fires.get(i).x][board.fires.get(i).y].changeState(new EmptyBlock());
+				board.fires.remove(i);
+			}
+		}
 		
 	}
 
@@ -191,6 +197,13 @@ public class Bomber extends GameObject{
 	public boolean fireable() {
 		
 		return true;
+	}
+
+
+	@Override
+	public boolean notFireable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

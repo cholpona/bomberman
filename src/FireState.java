@@ -47,5 +47,10 @@ public class FireState extends BlockState{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public boolean notFireable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

@@ -45,5 +45,10 @@ public HardBlock(){
 		
 		return false;
 	}
+	@Override
+	public boolean notFireable() {
+		
+		return true;
+	}
 
 }

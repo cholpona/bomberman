@@ -49,4 +49,10 @@ public class DoorBlock extends BlockState {
 		return false;
 	}
 
+	@Override
+	public boolean notFireable() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }

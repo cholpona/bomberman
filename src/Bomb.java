@@ -65,8 +65,8 @@ public class Bomb extends GameObject{
 
 	@Override
 	public void draw(Graphics g) {
-		 //g.setColor(color);
-	   //  g.fillOval(x*GameObject.SIZE, y*GameObject.SIZE, SIZE, SIZE);
+		 g.setColor(color);
+	     g.fillOval(x*GameObject.SIZE, y*GameObject.SIZE, SIZE, SIZE);
 		
 	}
 
@@ -87,6 +87,12 @@ public class Bomb extends GameObject{
 	public boolean fireable() {
 		
 		return true;//TODO check whether true or false
+	}
+
+	@Override
+	public boolean notFireable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 

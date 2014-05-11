@@ -53,5 +53,11 @@ public class BombBlock extends BlockState{
 		return true;//TODO true mu acaba?
 	}
 
+	@Override
+	public boolean notFireable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 }

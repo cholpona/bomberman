@@ -48,5 +48,10 @@ public class EmptyBlock extends BlockState{
 		
 		return true;//TODO change to false if necc
 	}
+	@Override
+	public boolean notFireable() {
+		
+		return true;//TODO look
+	}
 
 }

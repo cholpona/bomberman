@@ -67,5 +67,12 @@ public class Block extends GameObject{
 	public boolean fireable(){
 		return state.fireable();
 	}
+
+
+	@Override
+	public boolean notFireable() {
+		
+		return state.notFireable();
+	}
 	
 }
