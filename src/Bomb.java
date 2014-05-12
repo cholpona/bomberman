@@ -9,7 +9,7 @@ public class Bomb extends GameObject{
 	public int range;
 	public boolean removed;
 	public Board board;
-	public static final int MAXTIME=20;
+	public static final int MAXTIME=15;
 	public int counter;
 	public Bomb(int x, int y, Board board, int i){
 		removed=false;
