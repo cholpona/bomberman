@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import listener.KeyboardHandler;
 
 
 public class GamePanel extends JPanel{

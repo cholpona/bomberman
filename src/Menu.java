@@ -8,8 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import listener.KeyboardHandler;
-//TODO use later
 
 public class Menu extends JFrame{
 	public Menu()  {
