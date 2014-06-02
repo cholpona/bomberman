@@ -30,16 +30,19 @@ public HardBlock(){
 		return "HardBlock";
 	}
 
-	@Override
-	boolean walkAble() {
-		
-		return false;
-	}
+	
 	@Override
 	Color getColor() {
 	
 		return color;
 	}
+	
+	@Override
+	boolean walkAble() {
+		
+		return false;
+	}
+	
 	@Override
 	public boolean fireable() {
 		
@@ -50,5 +53,7 @@ public HardBlock(){
 		
 		return true;
 	}
+	
+	
 
 }

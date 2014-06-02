@@ -24,10 +24,11 @@ public class BomberGame {
 	        // Forever keep moving
 	        // This is the best way to do what we want,
 	        // but we'll use it for its simplicity 
-	        while(true) {
+	        while(game.running||!game.completed) {//player is alive
 	            game.update();
 	            Thread.currentThread().sleep(100);
 	        }
+	        
 		
 	}
 }

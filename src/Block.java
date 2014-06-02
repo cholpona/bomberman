@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public class Block extends GameObject{
 	public int x;
 	public int y;
-	public BlockState state;
+	//public BlockState state;
 	public Block(int x,int y){
 		this.x=x;
 		this.y=y;

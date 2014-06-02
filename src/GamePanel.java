@@ -15,13 +15,15 @@ public class GamePanel extends JPanel{
 	public Bomber bomber;
 	public Board board;
 	KeyboardHandler keyboardHandler;
+	LevelLoader levelLoader;
 	public GamePanel(){
 		board=new Board();
 		keyboardHandler=new KeyboardHandler();
 		addKeyListener(keyboardHandler);
-		this.bomber =new Bomber(1,1,keyboardHandler, board);
-		this.running=true;
+		this.bomber =new Bomber(1,1,keyboardHandler, this);
+		this.running=bomber.isAlive;
 		this.completed=false;
+		levelLoader=new LevelLoader(this);
 		
 		setLevel();
 		
@@ -42,43 +44,47 @@ public class GamePanel extends JPanel{
 			}
 		}
 		
-		
-		//board.board[bomber.x][bomber.y]=bomber;
-		
-		//board.board[enemy.x][enemy.y]=enemy;
+
+		Enemy enemy=new Enemy(board.board.length-2,board.board.length-2, this);
+		board.enemies.add(enemy);
 		
 	}
 	
-	public void startIt(){
-		long lastTime = System.nanoTime();
-		final double ns = 1000000000.0 / 60.0;
-		double delta = 0;
-		requestFocus();
-		
-		while(running) {
-			long now = System.nanoTime();
-			delta += (now - lastTime) / ns;
-			lastTime = now;
-			
-			while(delta >= 1) {
-				update();
-				delta--;
-			}
-			
-			repaint();
-			
-		}
-	}
+//	public void startIt(){
+//		long lastTime = System.nanoTime();
+//		final double ns = 1000000000.0 / 60.0;
+//		double delta = 0;
+//		requestFocus();
+//		
+//		while(running) {
+//			long now = System.nanoTime();
+//			delta += (now - lastTime) / ns;
+//			lastTime = now;
+//			
+//			while(delta >= 1) {
+//				update();
+//				delta--;
+//			}
+//	
+//			repaint();
+//			
+//		}
+//	}
 	private void draw() {
 		repaint();
 	}
 	void update() {
+		if(bomber.isAlive&&!board.allEnemiesRemoved){
 		keyboardHandler.update();//update Keyboard
 		board.update();
 		bomber.update();
 		//call draw
 		draw();
-		
+		}
+		else{
+			this.running=false;
+			//System.out.println("game is over");
+		}
 	}
 
     public void paint(Graphics g) {
@@ -87,6 +93,10 @@ public class GamePanel extends JPanel{
         board.draw(g);
         bomber.draw(g);
     }
+	public void addEnemy(Enemy gameObj) {
+		board.addEnemy(gameObj);
+		
+	}
 
 	
 	

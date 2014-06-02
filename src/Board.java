@@ -10,7 +10,7 @@ GameObject[][] board=new GameObject[BLOCKNUMBER][BLOCKNUMBER];
 public ArrayList<Bomb> bombs;
 public ArrayList<Enemy> enemies;
 public ArrayList<Fire> fires;
-public boolean completed;
+public boolean allEnemiesRemoved;
 
 
 
@@ -23,7 +23,7 @@ public Board(){
 	enemies=new ArrayList<Enemy>();
 	bombs=new ArrayList<Bomb>();
 	fires=new ArrayList<Fire>();
-	completed=false;
+	allEnemiesRemoved=false;
 	//board[2][2].changeState(new HardBlock());
 	//board[3][3].changeState(new SoftBlock());
 	
@@ -41,8 +41,13 @@ public String toString(){
 	
 }
 public void update() {
+		removeDiedEnemies();	
 		if(enemies.size()==0){
-			completed=true;
+			allEnemiesRemoved=true;
+		}
+		
+		for (int i = 0; i < enemies.size(); i++) {
+			enemies.get(i).update();
 		}
 		
 		for (int i = 0; i < bombs.size(); i++) {
@@ -54,17 +59,34 @@ public void update() {
 		}
 		
 }
+private void removeDiedEnemies() {
+	for (int i = 0; i < enemies.size(); i++) {
+			if(!(enemies.get(i).isAlive)){
+				enemies.remove(i);
+			}
+	}
+	
+}
 public void draw(Graphics g) {
+	
 	for (int i = 0; i < BLOCKNUMBER; i++) {
 		for (int j = 0; j < BLOCKNUMBER; j++) {
 			board[i][j].draw(g);
 		}
+	}
+	for (int i = 0; i < enemies.size(); i++) {
+		enemies.get(i).draw(g);
+		//System.out.println("enemi is drawn");
 	}
 	
 }
 
 public void readLevel(){
 	//TODO will read level from txt file
+}
+public void addEnemy(Enemy gameObj) {
+	enemies.add(gameObj);
+	
 }
 
 

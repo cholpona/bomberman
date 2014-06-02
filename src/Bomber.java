@@ -15,8 +15,8 @@ public class Bomber extends GameObject{
 	int dir;
 	int speed;
 	boolean isAlive;
-	Board board;
-	public Bomber(int x,int y, KeyboardHandler keyboardHandler, Board board){
+	GamePanel gamePanel;
+	public Bomber(int x,int y, KeyboardHandler keyboardHandler, GamePanel gamePanel){
 		this.color=color.green;
 		this.x=x;
 		this.y=y;
@@ -26,7 +26,7 @@ public class Bomber extends GameObject{
 		this.speed=SPEED;
 		this.isAlive=true;
 		//this.picture=Picture.bomber;
-		this.board=board;
+		this.gamePanel=gamePanel;
 
 
 	}
@@ -38,12 +38,11 @@ public class Bomber extends GameObject{
 
 	}
 
-	
 	public void move(int xa, int ya) {
 		if(xa != 0 && ya != 0) {
 			move(xa, 0);
 			move(0, ya);
-			return;
+			//return;
 		}
 // some bug here!!! DONE
 		if(xa > 0) dir = RIGHT;
@@ -57,28 +56,25 @@ public class Bomber extends GameObject{
 		}
 	}
 
-	private boolean canWalk() {
+	private boolean canWalk() {//TODO direaction.canmove yapayim
 
 		if(dir==RIGHT){
-			return board.board[x+1][y].walkable();
+			return gamePanel.board.board[x+1][y].walkable();
 		}
 		else if(dir==DOWN){
-			return board.board[x][y+1].walkable();
+			return gamePanel.board.board[x][y+1].walkable();
 		}
 		else if(dir==UP){
-			return board.board[x][y-1].walkable();
+			return gamePanel.board.board[x][y-1].walkable();
 		}
 		else if(dir==LEFT){
-			return board.board[x-1][y].walkable();
+			//if checks out of bound exception
+			return gamePanel.board.board[x-1][y].walkable();
 		}
 		else{ return false;}
 	}
 
-	@Override
-	public void fireOnMe() {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	@Override
 	public String toString() {
@@ -113,8 +109,9 @@ public class Bomber extends GameObject{
 		if(keyboardHandler.space){
 			if(BlockAvailable()){
 			putBomb();
-			}
 			System.out.println("bomb is planted at "+this.x+" "+this.y);
+			}
+			
 		}
 		if(xd!=0||yd!=0){
 			moving=true;
@@ -123,7 +120,7 @@ public class Bomber extends GameObject{
 		else{
 			moving=false;
 		}
-		updateBombs();
+		updateBombsAndFires();// TODO niye burda niye bombs da deil?
 		//colision with enemy
 		if(colisionWithEnemy()){
 			isAlive=false;
@@ -131,53 +128,58 @@ public class Bomber extends GameObject{
 		//colision with fire
 		if(colisionWithFire()){
 			isAlive=false;
+			System.out.println("you died");
 		}
-
 	}
 
 	private boolean BlockAvailable() {
-		for(int i = 0; i < board.bombs.size(); i++) {
-			if((x) == board.bombs.get(i).x &&(y) == board.bombs.get(i).y) return false;
+		for(int i = 0; i < gamePanel.board.bombs.size(); i++) {
+			if((x) == gamePanel.board.bombs.get(i).x &&(y) == gamePanel.board.bombs.get(i).y) return false;
 			}
 		
 		return true;
 	}
 
 	private void putBomb() {
-		Bomb bomb = new Bomb(x, y, board, 4);
-		board.bombs.add(bomb);
-		board.board[x][y].changeState(new BombBlock());
+		Bomb bomb = new Bomb(x, y, gamePanel, 3);
+		gamePanel.board.bombs.add(bomb);
+		gamePanel.board.board[x][y].changeState(new BombBlock());
 		
 	}
 
 	private boolean colisionWithFire() {
-		//TODO
+		
+		for (int i = 0; i <gamePanel.board.fires.size(); i++) {
+			if(gamePanel.board.fires.get(i).fireCollisionAt(this.x, this.y)){
+				return true;
+			}
+		}
+			
+		
 		return false;
 	}
 
-	private boolean colisionWithEnemy() {
-		
-			for(int i = 0; i < board.enemies.size(); i++) {
-				if(x == board.enemies.get(i).x && y == board.enemies.get(i).y ) return true;
+	private boolean colisionWithEnemy() {		
+			for(int i = 0; i < gamePanel.board.enemies.size(); i++) {
+				if(x == gamePanel.board.enemies.get(i).x && y == gamePanel.board.enemies.get(i).y ) return true;
 				}
 		
 		return false;
 	}
 
-	private void updateBombs() {
-		for (int i = 0; i <board.bombs.size(); i++) {
-			if(board.bombs.get(i).removed){
-				board.board[board.bombs.get(i).x][board.bombs.get(i).y].changeState(new EmptyBlock());
-				board.bombs.remove(i);
+	private void updateBombsAndFires() {
+		for (int i = 0; i <gamePanel.board.bombs.size(); i++) {
+			if(gamePanel.board.bombs.get(i).removed){
+				gamePanel.board.board[gamePanel.board.bombs.get(i).x][gamePanel.board.bombs.get(i).y].changeState(new EmptyBlock());
+				gamePanel.board.bombs.remove(i);
 			}
 		}
-		for (int i = 0; i < board.fires.size(); i++) {
-			if(board.fires.get(i).removed){
-				board.board[board.fires.get(i).x][board.fires.get(i).y].changeState(new EmptyBlock());
-				board.fires.remove(i);
+		for (int i = 0; i < gamePanel.board.fires.size(); i++) {
+			if(gamePanel.board.fires.get(i).removed){
+				gamePanel.board.board[gamePanel.board.fires.get(i).x][gamePanel.board.fires.get(i).y].changeState(new EmptyBlock());
+				gamePanel.board.fires.remove(i);
 			}
 		}
-		
 	}
 
 	@Override
@@ -195,7 +197,6 @@ public class Bomber extends GameObject{
 
 	@Override
 	public boolean fireable() {
-		
 		return true;
 	}
 
@@ -204,6 +205,12 @@ public class Bomber extends GameObject{
 	public boolean notFireable() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public void fireOnMe() {
+		// TODO Auto-generated method stub
+
 	}
 
 

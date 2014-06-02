@@ -8,15 +8,15 @@ import java.awt.Graphics;
 public class Bomb extends GameObject{
 	public int range;
 	public boolean removed;
-	public Board board;
+	public GamePanel gamePanel;
 	public static final int MAXTIME=15;
 	public int counter;
-	public Bomb(int x, int y, Board board, int i){
+	public Bomb(int x, int y, GamePanel gamePanel, int range){
 		removed=false;
 		this.x=x;
 		this.y=y;
-		this.board=board;
-		this.range=i;
+		this.gamePanel=gamePanel;
+		this.range=range;
 		this.color=color.BLACK;
 		this.counter=0;
 	}
@@ -73,9 +73,10 @@ public class Bomb extends GameObject{
 	public void update() {
 		if(counter>=MAXTIME){
 			
-			board.fires.add(new Fire(x,y,range,board));//add fire to board
+			gamePanel.board.fires.add(new Fire(x,y,this.range,gamePanel));//add fire to board
 			System.out.println("explode at "+this.x+" "+this.y);
 			this.removed=true;
+			
 		}
 		else{
 			counter++;

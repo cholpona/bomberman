@@ -42,7 +42,7 @@ public class Menu extends JFrame{
 			//	System.out.println(board.toString());
 				GamePanel game=new GamePanel();
 				add(game);
-				game.startIt();
+				//game.startIt();
 			}
 		});
 		openningPicturePanel.add(newButton);

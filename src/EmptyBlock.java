@@ -31,27 +31,29 @@ public class EmptyBlock extends BlockState{
 		return "Empty Block";
 	}
 
-	@Override
-	boolean walkAble() {
-		
-		return true;
-	}
-
+	
 	
 	@Override
 	Color getColor() {
 		
 		return color;
 	}
+	
+	@Override
+	boolean walkAble() {
+		
+		return true;
+	}
+
 	@Override
 	public boolean fireable() {
 		
-		return true;//TODO change to false if necc
+		return false;//TODO was true when working
 	}
 	@Override
 	public boolean notFireable() {
 		
-		return true;//TODO look
+		return false;//TODO look
 	}
 
 }

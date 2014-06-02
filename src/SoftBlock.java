@@ -31,17 +31,18 @@ public class SoftBlock extends BlockState{
 		return "soft ball";
 	}
 
-	@Override
-	boolean walkAble() {
-		
-		return false;
-	}
+	
 
 	@Override
 	Color getColor() {
 		return color;
 	}
 
+	@Override
+	boolean walkAble() {
+		
+		return false;
+	}
 	@Override
 	public boolean fireable() {
 		
@@ -51,7 +52,7 @@ public class SoftBlock extends BlockState{
 	@Override
 	public boolean notFireable() {
 		
-		return false;
+		return true;
 	}
 
 	
