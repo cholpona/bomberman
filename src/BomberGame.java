@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.io.FileNotFoundException;
 
 import javax.swing.JFrame;
 
@@ -6,7 +7,7 @@ import javax.swing.JFrame;
 
 
 public class BomberGame {
-	public static void main(String[] args) throws InterruptedException{
+	public static void main(String[] args) throws InterruptedException, FileNotFoundException{
 		
 		  JFrame frame = new JFrame("BomberMan");
 	        frame.setLayout(new BorderLayout());

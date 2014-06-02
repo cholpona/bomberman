@@ -1,6 +1,8 @@
 
 import java.awt.Graphics;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JPanel;
 
@@ -16,7 +18,7 @@ public class GamePanel extends JPanel{
 	public Board board;
 	KeyboardHandler keyboardHandler;
 	LevelLoader levelLoader;
-	public GamePanel(){
+	public GamePanel() throws FileNotFoundException{
 		board=new Board();
 		keyboardHandler=new KeyboardHandler();
 		addKeyListener(keyboardHandler);
@@ -28,8 +30,10 @@ public class GamePanel extends JPanel{
 		setLevel();
 		
 	}
-	private void setLevel() {
+	private void setLevel() throws FileNotFoundException {
+		Scanner scanner=new Scanner("level1.txt");
 		for (int i = 0; i < WIDTH/SPEED; i++) {
+			System.out.println(scanner.nextLine());
 			for (int j = 0; j < HEIGHT/SPEED; j++) {
 				Block block=new Block(i,j);
 				if((i%2==0&&j%2==0)||i==0||j==0||i==(WIDTH/SPEED-1)||j==(WIDTH/SPEED-1)){
@@ -47,6 +51,7 @@ public class GamePanel extends JPanel{
 
 		Enemy enemy=new Enemy(board.board.length-2,board.board.length-2, this);
 		board.enemies.add(enemy);
+		scanner.close();
 		
 	}
 	
