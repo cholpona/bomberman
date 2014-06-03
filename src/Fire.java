@@ -3,7 +3,7 @@ import java.awt.Graphics;
 
 
 public class Fire extends GameObject {
-	public static final int MAXTIME_FIRE=10;
+	public static final int MAXTIME_FIRE=15;
 	public int range;
 	private int rightFireable;
 	private int r;

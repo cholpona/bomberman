@@ -16,7 +16,7 @@ public class Enemy extends GameObject{
 	static final int UP=3;
 	static final int DOWN=4;
 	static final int SPEED=1;
-	static final int FREQUENCY=2;
+	static final int FREQUENCY=5;
 	int dir;
 	int speed;
 	

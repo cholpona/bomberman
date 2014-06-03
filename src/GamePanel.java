@@ -1,5 +1,6 @@
 
 import java.awt.Graphics;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,23 +19,26 @@ public class GamePanel extends JPanel{
 	public Board board;
 	KeyboardHandler keyboardHandler;
 	LevelLoader levelLoader;
-	String levelInStr;
+	
 	private int levelNo;
-	public GamePanel(String level){
+	private String levelInStr;
+	public GamePanel(){
 		board=new Board();
 		keyboardHandler=new KeyboardHandler();
 		addKeyListener(keyboardHandler);
 		this.bomber =new Bomber(1,1,keyboardHandler, this);
-		this.running=bomber.isAlive;
-		this.completed=false;
+		this.running=false;
+		this.completed=true;
 		levelLoader=new LevelLoader(this);
-		this.levelInStr=level;
-		this.levelNo=1;
+		this.levelInStr="";
+		this.levelNo=0;
 
-		setLevel();
+		//setLevel();
 
 	}
-	private void setLevel() {
+	public void loadLevel() {
+		bomber.setX(1);
+		bomber.setY(1);
 		String[] parts = levelInStr.split("\n");
 		for (int i = 0; i < WIDTH/SPEED; i++) {
 			String row=parts[i];
@@ -103,8 +107,7 @@ public class GamePanel extends JPanel{
 			else{
 				this.running=false;
 				this.completed=true;
-				System.out.println("enemyleri oldurdu");
-				levelNo++;//burda deil olabilir aslinda 
+				System.out.println("enemyleri oldurdu");	
 			}
 		}
 		else{
@@ -135,6 +138,20 @@ public class GamePanel extends JPanel{
 	public int getLevel() {
 		
 		return this.levelNo;
+	}
+	public  void readNextLevel() throws FileNotFoundException {
+		this.levelInStr="";
+		levelNo++;
+		System.out.println("the next level to read "+levelNo);
+		Scanner scanner =new Scanner(new File("level"+levelNo+".txt"));
+		while(scanner.hasNextLine()){
+		levelInStr=levelInStr+scanner.nextLine()+"\n";	
+		}
+		scanner.close();
+	}
+	public void start(){
+		this.running=true;
+		this.completed=false;
 	}
 
 
