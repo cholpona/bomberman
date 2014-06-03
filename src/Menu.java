@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,6 +11,12 @@ import javax.swing.JPanel;
 
 
 public class Menu extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	public Menu()  {
 		drawMenuScreen();
 	}
@@ -40,7 +47,10 @@ public class Menu extends JFrame{
 				revalidate();
 				System.out.println("gekd");
 			//	System.out.println(board.toString());
-				GamePanel game=new GamePanel();
+				GamePanel game = null;
+				
+					game = new GamePanel("");
+				
 				add(game);
 				//game.startIt();
 			}

@@ -3,7 +3,7 @@ import java.awt.Graphics;
 
 
 public class Fire extends GameObject {
-	public static final int MAXTIME_FIRE=6;
+	public static final int MAXTIME_FIRE=10;
 	public int range;
 	private int rightFireable;
 	private int r;
@@ -154,25 +154,29 @@ public class Fire extends GameObject {
 		}
 
 		for(int i = 1; i <= range; i++) {
-			if(r>i||rightFireable>=i){
-				if(x==this.x+1&&y==this.y){
+			if(r>=i||rightFireable>=i){
+				if(x+i<Board.BLOCKNUMBER){
+				if(x==this.x+i&&y==this.y){
 					return true;
-				}
+				}}
 			}
-			if(l > i || leftFireable >= i){
-				if(x==this.x-1&&y==this.y){
+			if(l >= i || leftFireable >= i){
+				if(x-i>0){
+				if(x==this.x-i&&y==this.y){
 					return true;
-				}
+				}}
 			}
-			if(d > i || downFireable >= i){ 
-				if(x==this.x&&y==this.y+1){
+			if(d >= i || downFireable >= i){ 
+				if(y+i<Board.BLOCKNUMBER){
+				if(x==this.x&&y==this.y+i){
 					return true;
-				}
+				}}
 			}
-			if(u > i || upFireable >= i){
-				if(x==this.x&&y==this.y-1){
+			if(u >= i || upFireable >= i){
+				if(y-i>0){
+				if(x==this.x&&y==this.y-i){
 					return true;
-				}
+				}}
 			}
 		}
 		return false;

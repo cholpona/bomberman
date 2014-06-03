@@ -16,7 +16,7 @@ public class Enemy extends GameObject{
 	static final int UP=3;
 	static final int DOWN=4;
 	static final int SPEED=1;
-	static final int FREQUENCY=1;
+	static final int FREQUENCY=2;
 	int dir;
 	int speed;
 	
@@ -155,8 +155,12 @@ public class Enemy extends GameObject{
 	}
 	
 	public void update(){
-		
-		
+		if(isAlive){
+			if(colisionWithFire()){//TODO copied to upper class
+				isAlive=false;
+				System.out.println("enemy died");
+			}
+			else{	
 		if(count>FREQUENCY){
 		moveForwad();	
 		count=0;
@@ -164,10 +168,8 @@ public class Enemy extends GameObject{
 		else{
 			count++;
 		}
+			}
 		
-		if(colisionWithFire()){//TODO copied to upper class
-			isAlive=false;
-			System.out.println("enemy died");
 		}
 	}
 	

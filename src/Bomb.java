@@ -79,7 +79,14 @@ public class Bomb extends GameObject{
 			
 		}
 		else{
+			if(colisionWithFire()){
+				gamePanel.board.fires.add(new Fire(x,y,this.range,gamePanel));//add fire to board
+				System.out.println("explode at "+this.x+" "+this.y);
+				this.removed=true;
+			}
+			else{
 			counter++;
+			}
 		}
 		
 	}
@@ -93,6 +100,18 @@ public class Bomb extends GameObject{
 	@Override
 	public boolean notFireable() {
 		// TODO Auto-generated method stub
+		return false;
+	}
+	
+private boolean colisionWithFire() {//TODO copied from bomber to upper calss
+		
+		for (int i = 0; i <gamePanel.board.fires.size(); i++) {
+			if(gamePanel.board.fires.get(i).fireCollisionAt(this.x, this.y)){
+				return true;
+			}
+		}
+			
+		
 		return false;
 	}
 	

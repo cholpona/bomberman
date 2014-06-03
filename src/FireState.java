@@ -33,7 +33,7 @@ public class FireState extends BlockState{
 	@Override
 	boolean walkAble() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

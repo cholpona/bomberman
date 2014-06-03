@@ -45,19 +45,18 @@ public void update() {
 		if(enemies.size()==0){
 			allEnemiesRemoved=true;
 		}
-		
-		for (int i = 0; i < enemies.size(); i++) {
-			enemies.get(i).update();
+			
+		for (int i = 0; i < fires.size(); i++) {
+			fires.get(i).update();//TODO is added in the right place
 		}
 		
 		for (int i = 0; i < bombs.size(); i++) {
 			bombs.get(i).update();
 			
 		}
-		for (int i = 0; i < fires.size(); i++) {
-			fires.get(i).update();//TODO is added in the right place
+		for (int i = 0; i < enemies.size(); i++) {
+			enemies.get(i).update();
 		}
-		
 }
 private void removeDiedEnemies() {
 	for (int i = 0; i < enemies.size(); i++) {
