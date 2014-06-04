@@ -32,11 +32,6 @@ public class Fire extends GameObject {
 		this.gamePanel=gamePanel;
 	}
 
-	@Override
-	public void playerOnMe() {
-		// TODO Auto-generated method stub
-
-	}
 
 
 	@Override
@@ -98,19 +93,19 @@ public class Fire extends GameObject {
 			for(int i = 1; i <= range; i++) {
 				if(r == -1) {
 					if(gamePanel.board.board[x+1][y].notFireable()) r = i - 1;
-					if(gamePanel.board.board[x+1][y].fireable()) rightFireable = i;
+					if(gamePanel.board.board[x+1][y].walkable()) rightFireable = i;
 				}
 				if(l == -1) {
 					if(gamePanel.board.board[x-1][y].notFireable()) l = i - 1;
-					if(gamePanel.board.board[x-1][y].fireable()) leftFireable = i;
+					if(gamePanel.board.board[x-1][y].walkable()) leftFireable = i;
 				}
 				if(d == -1) {
 					if(gamePanel.board.board[x][y+1].notFireable()) d = i - 1;
-					if(gamePanel.board.board[x][y+1].fireable()) downFireable = i;
+					if(gamePanel.board.board[x][y+1].walkable()) downFireable = i;
 				}
 				if(u == -1) {
 					if(gamePanel.board.board[x][y-1].notFireable()) u = i - 1;
-					if(gamePanel.board.board[x][y-1].fireable()) upFireable = i;
+					if(gamePanel.board.board[x][y-1].walkable()) upFireable = i;
 				}
 
 				if(i == range) {
@@ -122,8 +117,6 @@ public class Fire extends GameObject {
 			}
 
 			gamePanel.board.board[x][y].changeState(new FireState());
-			int playerX=gamePanel.bomber.x;
-			int playerY=gamePanel.bomber.y;
 			for(int i = 1; i <= range; i++) {
 				if(r>=i||rightFireable>=i){
 					if(x+i<gamePanel.board.board.length-1){
@@ -182,13 +175,6 @@ public class Fire extends GameObject {
 		return false;
 	}
 
-
-
-	@Override
-	public boolean fireable() {
-
-		return false;// TODO check fireable or not
-	}
 
 	@Override
 	public boolean notFireable() {

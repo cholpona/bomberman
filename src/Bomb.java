@@ -32,14 +32,6 @@ public class Bomb extends GameObject{
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void playerOnMe() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	@Override
 	public void fireOnMe() {
 		// TODO Auto-generated method stub
@@ -51,11 +43,7 @@ public class Bomb extends GameObject{
 		return "Bomb";
 	}
 
-	@Override
-	public void changeState(BlockState state) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public boolean walkable() {
@@ -91,11 +79,6 @@ public class Bomb extends GameObject{
 		
 	}
 
-	@Override
-	public boolean fireable() {
-		
-		return true;//TODO check whether true or false
-	}
 
 	@Override
 	public boolean notFireable() {
@@ -114,6 +97,12 @@ private boolean colisionWithFire() {//TODO copied from bomber to upper calss
 		
 		return false;
 	}
+
+@Override
+public void changeState(BlockState state) {
+	// TODO Auto-generated method stub
+	
+}
 	
 
 

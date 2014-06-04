@@ -19,12 +19,10 @@ public abstract  class GameObject{
 	}
 	public void move(){
 	}
-	public abstract void playerOnMe();
 	public abstract void fireOnMe();
 	public abstract String toString();
-	public abstract void changeState(BlockState state);
+	
 	public abstract boolean walkable();
-	public abstract boolean fireable();
 	public abstract void draw(Graphics g);
 	public abstract boolean notFireable();
 	public BlockState getState(){
@@ -53,6 +51,10 @@ public abstract  class GameObject{
 			}
 		else{
 			return null;}
+	}
+	
+	public void changeState(BlockState state){
+		state.setState((Block)this, state);
 	}
 	
 		

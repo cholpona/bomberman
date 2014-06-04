@@ -35,14 +35,6 @@ public class Enemy extends GameObject{
 		this.isAlive=true;
 	}
 
-
-	@Override
-	public void playerOnMe() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	@Override
 	public void fireOnMe() {
 		// TODO Auto-generated method stub
@@ -74,13 +66,6 @@ public class Enemy extends GameObject{
 
 
 	@Override
-	public boolean fireable() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-
-	@Override
 	public boolean notFireable() {
 		// TODO Auto-generated method stub
 		return false;
@@ -90,7 +75,7 @@ public class Enemy extends GameObject{
 		if(xa != 0 && ya != 0) {
 			move(xa, 0);
 			move(0, ya);
-			//return;
+			return;
 		}
 // some bug here!!! DONE
 		if(xa > 0) dir = RIGHT;
@@ -180,13 +165,9 @@ private boolean colisionWithFire() {//TODO copied from bomber to upper calss
 				return true;
 			}
 		}
-			
-		
 		return false;
 	}
-public void setGamePanel(GamePanel game){
-	this.gamePanel=gamePanel;
-}
+
 
 
 }

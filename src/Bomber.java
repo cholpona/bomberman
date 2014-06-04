@@ -30,14 +30,6 @@ public class Bomber extends GameObject{
 
 
 	}
-
-
-	@Override
-	public void playerOnMe() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void move(int xa, int ya) {
 		if(xa != 0 && ya != 0) {
 			move(xa, 0);
@@ -196,12 +188,6 @@ public class Bomber extends GameObject{
 
 
 	@Override
-	public boolean fireable() {
-		return true;
-	}
-
-
-	@Override
 	public boolean notFireable() {
 		// TODO Auto-generated method stub
 		return false;
@@ -211,6 +197,13 @@ public class Bomber extends GameObject{
 	public void fireOnMe() {
 		// TODO Auto-generated method stub
 
+	}
+
+
+	public void reset() {
+		this.x=1;
+		this.y=1;
+		
 	}
 
 

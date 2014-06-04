@@ -95,6 +95,10 @@ public void reset() {
 	allEnemiesRemoved=false;
 	
 }
+public void setBlockBlockAt(int x, int y, Block block) {
+	board[y][x]=block;
+	
+}
 
 
 }

@@ -14,12 +14,6 @@ public class Block extends GameObject{
 	
 	
 	@Override
-	public void playerOnMe() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void fireOnMe() {
 		// TODO Auto-generated method stub
 		
@@ -33,7 +27,7 @@ public class Block extends GameObject{
 	public String toString() {
 		return this.state.ToString();
 	}
-	@Override
+	
 	public void changeState(BlockState state) {
 		setState(state);
 		
@@ -57,22 +51,14 @@ public class Block extends GameObject{
 			g.setColor(state.getColor());
 	        g.fillRect(x*20, y*20, SIZE, SIZE);
 		}
-		
 	
-		
-	}
-
-
-	@Override
-	public boolean fireable(){
-		return state.fireable();
 	}
 
 
 	@Override
 	public boolean notFireable() {
-		
 		return state.notFireable();
 	}
-	
+
+
 }

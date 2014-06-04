@@ -73,7 +73,7 @@ public class LevelLoader {
 			board[gameObj.x][gameObj.y]=gameObj;
 		}
 		else if (gameObj instanceof Enemy){
-			((Enemy) gameObj).setGamePanel(gamePanel);
+			//((Enemy) gameObj).setGamePanel(gamePanel);
 			gamePanel.addEnemy((Enemy) gameObj);
 			}
 		else
