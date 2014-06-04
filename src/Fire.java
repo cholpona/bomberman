@@ -16,9 +16,9 @@ public class Fire extends GameObject {
 	public Color color;
 	public int counter;
 	public boolean removed;
-	public GamePanel gamePanel;
+	public Board board;
 
-	public Fire(int x, int y, int range,GamePanel gamePanel){
+	public Fire(int x, int y, int range,Board board){
 		super(x,y,Color.orange);
 		this.r=-1;
 		this.l=-1;
@@ -27,7 +27,7 @@ public class Fire extends GameObject {
 		this.range=range;
 		this.counter=0;
 		this.removed=false;
-		this.gamePanel=gamePanel;
+		this.board=board;
 	}
 
 	@Override
@@ -50,25 +50,25 @@ public class Fire extends GameObject {
 			for(int i = 1; i <= range; i++) {
 				if(r == -1) {
 					if(x+i<Board.BLOCKNUMBER-1){
-						if(gamePanel.board.board[x+i][y].solid()) r = i - 1;
-						if(gamePanel.board.board[x+i][y].burnable()) rightFireable = i;
+						if(board.board[x+i][y].solid()) r = i - 1;
+						if(board.board[x+i][y].burnable()) rightFireable = i;
 					}
 				}
 				if(l == -1) {
 					if(x-i>0){
-						if(gamePanel.board.board[x-i][y].solid()) l = i - 1;
-						if(gamePanel.board.board[x-i][y].burnable()) leftFireable = i;
+						if(board.board[x-i][y].solid()) l = i - 1;
+						if(board.board[x-i][y].burnable()) leftFireable = i;
 					}
 				}
 				if(d == -1) {
 					if(y+i<Board.BLOCKNUMBER-1){
-						if(gamePanel.board.board[x][y+i].solid()) d = i - 1;
-						if(gamePanel.board.board[x][y+i].burnable()) downFireable = i;}
+						if(board.board[x][y+i].solid()) d = i - 1;
+						if(board.board[x][y+i].burnable()) downFireable = i;}
 				}
 				if(u == -1) {
 					if(y-1>0){
-						if(gamePanel.board.board[x][y-i].solid()) u = i - 1;
-						if(gamePanel.board.board[x][y-i].burnable()) upFireable = i;}
+						if(board.board[x][y-i].solid()) u = i - 1;
+						if(board.board[x][y-i].burnable()) upFireable = i;}
 				}
 
 				if(i == range) {
@@ -86,23 +86,23 @@ public class Fire extends GameObject {
 
 
 	private void changeFiredTo(BlockState state) {
-		gamePanel.board.board[x][y].changeState(state);		
+		board.board[x][y].changeState(state);		
 		for(int i = 1; i <= range; i++) {
 			if(r>=i||rightFireable>=i){
 				if(x+i<Board.BLOCKNUMBER-1){
-					gamePanel.board.board[x+i][y].changeState(state);}
+					board.board[x+i][y].changeState(state);}
 			}
 			if(l >= i || leftFireable >= i){
 				if(x-i>0){
-					gamePanel.board.board[x-i][y].changeState(state);}
+					board.board[x-i][y].changeState(state);}
 			}
 			if(d >= i || downFireable >= i){ 
 				if(y+i<Board.BLOCKNUMBER-1){
-					gamePanel.board.board[x][y+i].changeState(state);}
+					board.board[x][y+i].changeState(state);}
 			}
 			if(u >= i || upFireable >= i){
 				if(y-i>0){
-					gamePanel.board.board[x][y-i].changeState(state);}
+					board.board[x][y-i].changeState(state);}
 			}
 		}
 	}

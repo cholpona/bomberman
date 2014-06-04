@@ -87,7 +87,7 @@ public class Bomber extends MovingObject{
 	}
 
 	private void putBomb() {
-		Bomb bomb = new Bomb(x, y, gamePanel, 3);
+		Bomb bomb = new Bomb(x, y, gamePanel.board, 3);
 		gamePanel.board.bombs.add(bomb);
 		gamePanel.board.board[x][y].changeState(new BombBlock());
 	}
