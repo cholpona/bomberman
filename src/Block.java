@@ -15,21 +15,16 @@ public class Block extends GameObject{
 	
 	@Override
 	public void fireOnMe() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 	
-	public void setState(BlockState state) {
-		this.state=state;
-		
-	}
 	@Override
 	public String toString() {
 		return this.state.ToString();
 	}
 	
 	public void changeState(BlockState state) {
-		setState(state);
+		this.state=state;
 		
 	}
 

@@ -4,29 +4,22 @@ import java.util.Currency;
 import java.util.Random;
 
 
-public class Enemy extends GameObject{
+public class Enemy extends MovingObject{
 	public int x;
 	public int y;
 	Color color;
 	int freq=10;
 	boolean isAlive;
 	
-	static final int LEFT=1;
-	static final int RIGHT=2;
-	static final int UP=3;
-	static final int DOWN=4;
-	static final int SPEED=1;
 	static final int FREQUENCY=5;
-	int dir;
-	int speed;
 	
-	GamePanel gamePanel;
+	
 	Random randomDir;
 	int count;
 	public Enemy(int x ,int y,GamePanel gamePanel){
-		this.color=color.PINK;
 		this.x=x;
 		this.y=y;
+		this.color=color.PINK;
 		this.gamePanel=gamePanel;
 		count=0;
 		randomDir=new Random();
@@ -122,22 +115,6 @@ public class Enemy extends GameObject{
 	}
 
 
-	private boolean canWalk() {//TODO direaction.canmove yapayim
-
-		if(dir==RIGHT){
-			return gamePanel.board.board[x+1][y].walkable();
-		}
-		else if(dir==DOWN){
-			return gamePanel.board.board[x][y+1].walkable();
-		}
-		else if(dir==UP){
-			return gamePanel.board.board[x][y-1].walkable();
-		}
-		else if(dir==LEFT){
-			return gamePanel.board.board[x-1][y].walkable();
-		}
-		else{ return false;}
-	}
 	
 	public void update(){
 		if(isAlive){
@@ -157,17 +134,28 @@ public class Enemy extends GameObject{
 		
 		}
 	}
-	
-private boolean colisionWithFire() {//TODO copied from bomber to upper calss
-		
-		for (int i = 0; i <gamePanel.board.fires.size(); i++) {
-			if(gamePanel.board.fires.get(i).fireCollisionAt(this.x, this.y)){
-				return true;
-			}
+	protected boolean canWalk() {//TODO direaction.canmove yapayim
+
+		if(dir==RIGHT){
+			return gamePanel.board.board[x+1][y].walkable();
 		}
+		else if(dir==DOWN){
+			return gamePanel.board.board[x][y+1].walkable();
+		}
+		else if(dir==UP){
+			return gamePanel.board.board[x][y-1].walkable();
+		}
+		else if(dir==LEFT){
+			if(x-1>0)
+				return gamePanel.board.board[x-1][y].walkable();
+		}
+		
 		return false;
 	}
+	
 
+	
+	
 
 
 }

@@ -4,22 +4,15 @@ import java.awt.Graphics;
 
 
 
-public class Bomber extends GameObject{
-	static final int LEFT=1;
-	static final int RIGHT=2;
-	static final int UP=3;
-	static final int DOWN=4;
-	static final int SPEED=1;
+public class Bomber extends MovingObject{
+	
 	KeyboardHandler keyboardHandler;
 	boolean moving;
-	int dir;
-	int speed;
-	boolean isAlive;
-	GamePanel gamePanel;
+	
 	public Bomber(int x,int y, KeyboardHandler keyboardHandler, GamePanel gamePanel){
-		this.color=color.green;
 		this.x=x;
 		this.y=y;
+		this.color=color.green;
 		this.keyboardHandler=keyboardHandler;	
 		this.moving=false;
 		this.dir=RIGHT;
@@ -48,23 +41,6 @@ public class Bomber extends GameObject{
 		}
 	}
 
-	private boolean canWalk() {//TODO direaction.canmove yapayim
-
-		if(dir==RIGHT){
-			return gamePanel.board.board[x+1][y].walkable();
-		}
-		else if(dir==DOWN){
-			return gamePanel.board.board[x][y+1].walkable();
-		}
-		else if(dir==UP){
-			return gamePanel.board.board[x][y-1].walkable();
-		}
-		else if(dir==LEFT){
-			//if checks out of bound exception
-			return gamePanel.board.board[x-1][y].walkable();
-		}
-		else{ return false;}
-	}
 
 	
 
@@ -139,17 +115,7 @@ public class Bomber extends GameObject{
 		
 	}
 
-	private boolean colisionWithFire() {
-		
-		for (int i = 0; i <gamePanel.board.fires.size(); i++) {
-			if(gamePanel.board.fires.get(i).fireCollisionAt(this.x, this.y)){
-				return true;
-			}
-		}
-			
-		
-		return false;
-	}
+	
 
 	private boolean colisionWithEnemy() {		
 			for(int i = 0; i < gamePanel.board.enemies.size(); i++) {
@@ -205,6 +171,27 @@ public class Bomber extends GameObject{
 		this.y=1;
 		
 	}
+	protected boolean canWalk() {//TODO direaction.canmove yapayim
+
+		if(dir==RIGHT){
+			return gamePanel.board.board[x+1][y].walkable();
+		}
+		else if(dir==DOWN){
+			return gamePanel.board.board[x][y+1].walkable();
+		}
+		else if(dir==UP){
+			return gamePanel.board.board[x][y-1].walkable();
+		}
+		else if(dir==LEFT){
+			if(x-1>0)
+				return gamePanel.board.board[x-1][y].walkable();
+		}
+		
+		return false;
+	}
+	
+
+	
 
 
 }

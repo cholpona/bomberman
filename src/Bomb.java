@@ -12,13 +12,14 @@ public class Bomb extends GameObject{
 	public static final int MAXTIME=20;
 	public int counter;
 	public Bomb(int x, int y, GamePanel gamePanel, int range){
-		removed=false;
 		this.x=x;
 		this.y=y;
+		removed=false;
 		this.gamePanel=gamePanel;
 		this.range=range;
 		this.color=color.BLACK;
 		this.counter=0;
+		
 	}
 
 	@Override

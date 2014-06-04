@@ -19,12 +19,12 @@ public class Fire extends GameObject {
 	public GamePanel gamePanel;
 
 	public Fire(int x, int y, int range,GamePanel gamePanel){
+		this.x=x;
+		this.y=y;
 		this.r=-1;
 		this.l=-1;
 		this.u=-1;
 		this.d=-1;
-		this.x=x;
-		this.y=y;
 		this.range=range;
 		this.color=color.ORANGE;
 		this.counter=0;

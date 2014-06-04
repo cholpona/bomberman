@@ -10,6 +10,9 @@ public abstract  class GameObject{
 	Picture picture;
 	Color color;
 	BlockState state;
+	
+	
+	
 	public void setX(int x){
 		this.x=x;
 	}
@@ -54,7 +57,7 @@ public abstract  class GameObject{
 	}
 	
 	public void changeState(BlockState state){
-		state.setState((Block)this, state);
+		
 	}
 	
 		
