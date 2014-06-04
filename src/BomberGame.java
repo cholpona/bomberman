@@ -14,6 +14,8 @@ import javax.swing.Timer;
 public class BomberGame extends JFrame{
 	static final int MAX_LEVEL=3;
 	static final int FREQ=60;
+	public static final int LASTLEVEL=2;
+	private int levelNo;
 	private GamePanel game;
 	private Timer gameTimer;
 	
@@ -79,6 +81,13 @@ public class BomberGame extends JFrame{
 		};
 		gameTimer = new Timer(FREQ, listener);
 		gameTimer.start();
+	}
+	
+	public boolean nextLevelExist() {
+		if(levelNo<LASTLEVEL){
+			return true;
+		}
+		else return false;
 	}
 	
 	

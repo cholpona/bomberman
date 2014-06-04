@@ -21,7 +21,7 @@ public class GamePanel extends JPanel{
 
 	private boolean completed;
 	private  boolean running;
-	private Bomber bomber;
+	Bomber bomber;
 	public Board board;
 	private KeyboardHandler keyboardHandler;
 	private int levelNo;
