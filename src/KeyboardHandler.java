@@ -12,7 +12,6 @@ public class KeyboardHandler implements KeyListener {
 	public boolean up, down, left, right, space;
 	
 	public void update() {
-		
 		up = keys[KeyEvent.VK_UP] ;
 		down = keys[KeyEvent.VK_DOWN] ;
 		left = keys[KeyEvent.VK_LEFT] ;

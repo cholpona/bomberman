@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 
@@ -12,44 +13,25 @@ public class Bomb extends GameObject{
 	public static final int MAXTIME=20;
 	public int counter;
 	public Bomb(int x, int y, GamePanel gamePanel, int range){
-		this.x=x;
-		this.y=y;
+		super(x,y,Color.black);
 		removed=false;
 		this.gamePanel=gamePanel;
 		this.range=range;
-		this.color=color.BLACK;
 		this.counter=0;
 		
 	}
-
-	@Override
-	public void setX(int x) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setY(int y) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void fireOnMe() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String toString() {
-		return "Bomb";
-	}
-
 	
 
 	@Override
-	public boolean walkable() {
+	public boolean burnable() {
 		
 		return true;//TODO need to check true or false?
+	}
+	
+	@Override
+	public boolean solid() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
@@ -81,11 +63,7 @@ public class Bomb extends GameObject{
 	}
 
 
-	@Override
-	public boolean notFireable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 	
 private boolean colisionWithFire() {//TODO copied from bomber to upper calss
 		

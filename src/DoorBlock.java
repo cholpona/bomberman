@@ -14,29 +14,6 @@ public class DoorBlock extends BlockState {
 		
 	}
 
-	@Override
-	void drawMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	void fireOnMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	String ToString() {
-		return "Door Block";
-	}
-
-	@Override
-	boolean walkAble() {
-		return true;
-	}
-
-	
 
 	@Override
 	Color getColor() {
@@ -44,15 +21,15 @@ public class DoorBlock extends BlockState {
 	}
 
 	@Override
-	public boolean fireable() {
-		
+	public boolean solid() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean notFireable() {
+	public boolean burnable() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 }

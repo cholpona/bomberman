@@ -1,0 +1,13 @@
+1)About Keyboard handler which is better to have an independent keyboardhandler that do not know about the bomber-> the code in bomber increases
+OR should I make it as in SpaceInvaders?
+
+2)Direction? should I add a state like direction???
+
+
+
+
+
+
+
+Note:
+If I want the bomb to be oval I need to check the if the tostring of the block is equal to the "bomb block" and then make it gray and make the oval inside the grect

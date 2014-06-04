@@ -12,29 +12,6 @@ public class FireState extends BlockState{
 		
 	}
 
-	@Override
-	void drawMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	void fireOnMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	String ToString() {
-		
-		return "Fire";
-	}
-
-	@Override
-	boolean walkAble() {
-		// TODO Auto-generated method stub
-		return true;
-	}
 
 	@Override
 	Color getColor() {
@@ -42,13 +19,14 @@ public class FireState extends BlockState{
 		return color;
 	}
 
+	
 	@Override
-	public boolean fireable() {
+	public boolean solid() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 	@Override
-	public boolean notFireable() {
+	public boolean burnable() {
 		// TODO Auto-generated method stub
 		return false;
 	}

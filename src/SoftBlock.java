@@ -14,46 +14,22 @@ public class SoftBlock extends BlockState{
 	}
 
 	@Override
-	void drawMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	void fireOnMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	String ToString() {
-		
-		return "soft ball";
-	}
-
-	
-
-	@Override
 	Color getColor() {
 		return color;
 	}
 
 	@Override
-	boolean walkAble() {
-		
-		return false;
-	}
-	@Override
-	public boolean fireable() {
-		
+	public boolean burnable() {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public boolean notFireable() {
-		
+	public boolean solid() {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
+	
 	
 }

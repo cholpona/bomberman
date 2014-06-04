@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 
@@ -11,16 +12,13 @@ public class MovingObject extends GameObject{
 	public int speed;
 	public boolean isAlive;
 	public GamePanel gamePanel;
-	//TODO constructor ile yapmaya dene
 	
+public MovingObject(int x, int y,Color color){
+	super(x,y,color);
+	this.isAlive=true;
 	
+}
 	
-	@Override
-	public void fireOnMe() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -28,30 +26,50 @@ public class MovingObject extends GameObject{
 	}
 
 	@Override
-	public boolean walkable() {
+	public boolean burnable() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean solid() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		g.setColor(this.color);
+		g.fillOval(x*GameObject.SIZE, y*GameObject.SIZE, SIZE, SIZE);
+		// System.out.println("enemy is drawn");
 	}
-
-	@Override
-	public boolean notFireable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-protected boolean colisionWithFire() {//TODO copied from bomber to upper calss
+	
+public boolean colisionWithFire() {//TODO copied from bomber to upper calss
 		
 		for (int i = 0; i <gamePanel.board.fires.size(); i++) {
-			if(gamePanel.board.fires.get(i).fireCollisionAt(this.x, this.y)){
+			if(gamePanel.board.fires.get(i).fireCollisionAt(this.getX(), this.getY())){
 				return true;
 			}
 		}
 		return false;
 	}
+
+protected boolean canWalk() {//TODO direaction.canmove yapayim
+
+	if(dir==RIGHT){
+		return !gamePanel.board.board[x+1][y].solid();
+	}
+	else if(dir==DOWN){
+		return !gamePanel.board.board[x][y+1].solid();
+	}
+	else if(dir==UP){
+		return !gamePanel.board.board[x][y-1].solid();
+	}
+	else if(dir==LEFT){
+		if(x-1>0)
+			return !gamePanel.board.board[x-1][y].solid();
+	}
+	
+	return false;
+}
 
 }

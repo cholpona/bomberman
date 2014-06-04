@@ -53,7 +53,6 @@ public class GamePanel extends JPanel{
 			else{
 				this.running=false;
 				this.completed=true;
-
 			}
 		}
 		else{
@@ -117,25 +116,19 @@ public class GamePanel extends JPanel{
 		board.reset();
 		bomber.reset();
 		String[] levelMap = levelInStr.split("\n");
+		char currChar;
 		for (int i = 0; i < WIDTH/SPEED; i++) {
 			String row=levelMap[i];
-
 			for (int j = 0; j < HEIGHT/SPEED; j++) {
 				Block block=new Block(j,i);
-				if(row.charAt(j)=='h'){
-					block.changeState(new HardBlock());
-				}
-				else if(row.charAt(j)=='s'){
-					block.changeState(new SoftBlock());
-				}
-				else if(row.charAt(j)=='n'){
-					block.changeState(new EmptyBlock());
-				}
-				else if(row.charAt(j)=='e'){
-					block.changeState(new EmptyBlock());
+				currChar=row.charAt(j);
+				 if(currChar=='e'){
 					Enemy enemy=new Enemy(j,i, this);
 					addEnemy(enemy);
 				}
+				 else {
+					 block.changeStateTo(currChar);
+				 }
 				setBlockAt(i, j, block);
 			}
 		}

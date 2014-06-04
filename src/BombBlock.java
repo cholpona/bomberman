@@ -17,47 +17,23 @@ public class BombBlock extends BlockState{
 	}
 
 	@Override
-	void drawMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	void fireOnMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	String ToString() {
-		// TODO Auto-generated method stub
-		return "Bomb Block";
-	}
-
-	@Override
-	boolean walkAble() {
-		
-		return false;
-	}
-
-	
-
-	@Override
 	Color getColor() {
 		return color;
 	}
 
 	@Override
-	public boolean fireable() {
+	public boolean solid() {
 		
-		return true;//TODO true mu acaba?
+		return false;
 	}
 
 	@Override
-	public boolean notFireable() {
+	public boolean burnable() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
+
+	
 
 	
 }

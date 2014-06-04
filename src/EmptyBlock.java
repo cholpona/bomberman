@@ -12,26 +12,6 @@ public class EmptyBlock extends BlockState{
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	void drawMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	void fireOnMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	String ToString() {
-		
-		return "Empty Block";
-	}
-
-	
 	
 	@Override
 	Color getColor() {
@@ -39,21 +19,16 @@ public class EmptyBlock extends BlockState{
 		return color;
 	}
 	
-	@Override
-	boolean walkAble() {
-		
-		return true;
-	}
 
+	
 	@Override
-	public boolean fireable() {
-		
-		return false;//TODO was true when working
+	public boolean solid() {
+		return false;//TODO look
 	}
 	@Override
-	public boolean notFireable() {
-		
-		return false;//TODO look
+	public boolean burnable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

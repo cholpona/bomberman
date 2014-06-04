@@ -3,57 +3,40 @@ import java.awt.Graphics;
 
 
 public class Block extends GameObject{
-	public int x;
-	public int y;
-	//public BlockState state;
 	public Block(int x,int y){
-		this.x=x;
-		this.y=y;
+		super(x,y,Color.GRAY);
 		this.state=new EmptyBlock();
-	}
-	
-	
-	@Override
-	public void fireOnMe() {
-		// TODO Auto-generated method stub	
-	}
-	
-	@Override
-	public String toString() {
-		return this.state.ToString();
 	}
 	
 	public void changeState(BlockState state) {
 		this.state=state;
-		
 	}
 
 	@Override
-	public boolean walkable() {
-		
-		return this.state.walkable();
+	public boolean burnable() {
+				return this.state.burnable();
+	}
+	@Override
+	public boolean solid() {
+		return state.solid();
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		if(state.ToString().equals("Bomb Block")){
-			g.setColor(color.gray);
-	        g.fillRect(x*20, y*20, SIZE, SIZE);
 			g.setColor(state.getColor());
-	        g.fillOval(x*20, y*20, SIZE, SIZE);
+	        g.fillRect(x*20, y*20, SIZE, SIZE);
+	}
+	
+	public void changeStateTo(char ch){
+		if(ch=='s'){
+			this.changeState(new SoftBlock());
+		}
+		else if(ch=='h'){
+			this.changeState(new HardBlock());
 		}
 		else{
-			g.setColor(state.getColor());
-	        g.fillRect(x*20, y*20, SIZE, SIZE);
+			this.changeState(new EmptyBlock());
 		}
-	
 	}
-
-
-	@Override
-	public boolean notFireable() {
-		return state.notFireable();
-	}
-
 
 }

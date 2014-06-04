@@ -13,45 +13,20 @@ public HardBlock(){
 	}
 
 	@Override
-	void drawMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	void fireOnMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	String ToString() {
-		
-		return "HardBlock";
-	}
-
-	
-	@Override
 	Color getColor() {
 	
 		return color;
 	}
 	
 	@Override
-	boolean walkAble() {
-		
-		return false;
-	}
-	
-	@Override
-	public boolean fireable() {
-		
-		return false;
-	}
-	@Override
-	public boolean notFireable() {
+	public boolean solid() {
 		
 		return true;
+	}
+	@Override
+	public boolean burnable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	

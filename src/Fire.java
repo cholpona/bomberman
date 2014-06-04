@@ -19,26 +19,18 @@ public class Fire extends GameObject {
 	public GamePanel gamePanel;
 
 	public Fire(int x, int y, int range,GamePanel gamePanel){
-		this.x=x;
-		this.y=y;
+		super(x,y,Color.orange);
 		this.r=-1;
 		this.l=-1;
 		this.u=-1;
 		this.d=-1;
 		this.range=range;
-		this.color=color.ORANGE;
+		
 		this.counter=0;
 		this.removed=false;
 		this.gamePanel=gamePanel;
 	}
 
-
-
-	@Override
-	public void fireOnMe() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public String toString() {
@@ -53,7 +45,7 @@ public class Fire extends GameObject {
 	}
 
 	@Override
-	public boolean walkable() {
+	public boolean burnable() {
 
 		return true;
 	}
@@ -92,20 +84,26 @@ public class Fire extends GameObject {
 
 			for(int i = 1; i <= range; i++) {
 				if(r == -1) {
-					if(gamePanel.board.board[x+1][y].notFireable()) r = i - 1;
-					if(gamePanel.board.board[x+1][y].walkable()) rightFireable = i;
+					if(x+i<gamePanel.board.board.length-1){
+					if(gamePanel.board.board[x+i][y].solid()) r = i - 1;
+					if(gamePanel.board.board[x+i][y].burnable()) rightFireable = i;
+					}
 				}
 				if(l == -1) {
-					if(gamePanel.board.board[x-1][y].notFireable()) l = i - 1;
-					if(gamePanel.board.board[x-1][y].walkable()) leftFireable = i;
+					if(x-i>0){
+					if(gamePanel.board.board[x-i][y].solid()) l = i - 1;
+					if(gamePanel.board.board[x-i][y].burnable()) leftFireable = i;
+					}
 				}
 				if(d == -1) {
-					if(gamePanel.board.board[x][y+1].notFireable()) d = i - 1;
-					if(gamePanel.board.board[x][y+1].walkable()) downFireable = i;
+					if(y+i<gamePanel.board.board.length-1){
+					if(gamePanel.board.board[x][y+i].solid()) d = i - 1;
+					if(gamePanel.board.board[x][y+i].burnable()) downFireable = i;}
 				}
 				if(u == -1) {
-					if(gamePanel.board.board[x][y-1].notFireable()) u = i - 1;
-					if(gamePanel.board.board[x][y-1].walkable()) upFireable = i;
+					if(y-1>0){
+					if(gamePanel.board.board[x][y-i].solid()) u = i - 1;
+					if(gamePanel.board.board[x][y-i].burnable()) upFireable = i;}
 				}
 
 				if(i == range) {
@@ -177,7 +175,7 @@ public class Fire extends GameObject {
 
 
 	@Override
-	public boolean notFireable() {
+	public boolean solid() {
 		// TODO Auto-generated method stub
 		return false;
 	}
