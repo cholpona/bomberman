@@ -15,6 +15,7 @@ public class GamePanel extends JPanel{
 	public static final int WIDTH=500;
 	public static final int HEIGHT=500;
 	public static final int SPEED=GameObject.SIZE;
+	public static final int LASTLEVEL=2;
 	public Bomber bomber;
 	public Board board;
 	KeyboardHandler keyboardHandler;
@@ -37,6 +38,7 @@ public class GamePanel extends JPanel{
 
 	}
 	public void loadLevel() {
+		board.reset();
 		bomber.setX(1);
 		bomber.setY(1);
 		String[] parts = levelInStr.split("\n");
@@ -45,7 +47,7 @@ public class GamePanel extends JPanel{
 			//System.out.println(row);
 			for (int j = 0; j < HEIGHT/SPEED; j++) {
 				Block block=new Block(j,i);
-				System.out.print(row.charAt(j));
+			//	System.out.print(row.charAt(j));
 				if(row.charAt(j)=='h'){
 					block.changeState(new HardBlock());
 				}
@@ -65,9 +67,9 @@ public class GamePanel extends JPanel{
 				
 				board.board[j][i]=block;
 			}
-			System.out.println();
+		//System.out.println();
 		}
-
+System.out.println("Level "+levelNo+" is loaded");
 
 		
 
@@ -129,11 +131,11 @@ public class GamePanel extends JPanel{
 
 	}
 	public boolean isRunning(){
-		return running;
+		return this.running;
 	}
 	
 	public boolean isCompleted(){
-		return completed;
+		return this.completed;
 	}
 	public int getLevel() {
 		
@@ -142,7 +144,6 @@ public class GamePanel extends JPanel{
 	public  void readNextLevel() throws FileNotFoundException {
 		this.levelInStr="";
 		levelNo++;
-		System.out.println("the next level to read "+levelNo);
 		Scanner scanner =new Scanner(new File("level"+levelNo+".txt"));
 		while(scanner.hasNextLine()){
 		levelInStr=levelInStr+scanner.nextLine()+"\n";	
@@ -152,6 +153,13 @@ public class GamePanel extends JPanel{
 	public void start(){
 		this.running=true;
 		this.completed=false;
+		System.out.println("level "+ levelNo+ " is started");
+	}
+	public boolean nextLevelExist() {
+		if(levelNo<LASTLEVEL){
+			return true;
+		}
+		else return false;
 	}
 
 

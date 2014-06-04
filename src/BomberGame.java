@@ -1,63 +1,87 @@
+
 import java.awt.BorderLayout;
-import java.io.File;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+
 
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 
 
 
-public class BomberGame {
-	static String level="";
+public class BomberGame extends JFrame{
 	static final int MAX_LEVEL=3;
 	static final int FREQ=60;
-	public static void main(String[] args) throws InterruptedException, FileNotFoundException{
-
-		//readNextLevel();
-
-		JFrame frame = new JFrame("BomberMan");
-		frame.setLayout(new BorderLayout());
-		frame.setSize(520, 540); //      
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		GamePanel game = new GamePanel();
-		frame.add(game, BorderLayout.CENTER);
-		frame.setVisible(true);
-		// This is needed to make the game panel respond
-		// to key strokes
-		game.requestFocusInWindow();
-
-		while(game.getLevel()<=MAX_LEVEL){
-			while(game.isRunning()&&!game.isCompleted()) {//player is alive
-				Thread.currentThread();
-				Thread.sleep(FREQ);
-				game.update();
-
+	private GamePanel game;
+	private Timer gameTimer;
+	
+	public static void main(String[] args) {
+		BomberGame bomberGame=new BomberGame();
+	}
+	
+	public BomberGame(){
+		setLayout(new BorderLayout());
+		setSize(520, 540); //      
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		game = new GamePanel();
+		add(game, BorderLayout.CENTER);
+		setVisible(true);
+		run();
+	}
+	
+	
+	private void run(){
+		ActionListener listener = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				game.requestFocusInWindow();
+				if (game.isRunning()) {
+					game.update();
+				} else {
+					gameTimer.stop();
+					if(game.isCompleted()){
+						if(game.nextLevelExist()){
+						startNextLevel();}
+						else{
+							printVictoryMessage();
+						}
+					}
+					else{
+						printByeMessage();
+					}
+				}
 			}
-			if(game.isCompleted()){
+
+			private void printVictoryMessage() {
+				System.out.println("Yaaaaay you passed all levels");
 				
-				game.readNextLevel();//read
-				game.loadLevel();//load
-				game.start();//start completed true->false running false-> true
-				Thread.currentThread().interrupt();
-				//game
-			}else{
-				System.out.println("you lose!");
-				break;
 			}
 
-		}
-		System.out.println("you have passed all degrees!");
+			private void printByeMessage() {
+				System.out.println("Sorry you lose!");
+			}
 
+			private void startNextLevel() {
+				
+				try {
+					game.readNextLevel();
+				} catch (FileNotFoundException e1) {
+					System.out.println("Error in reading level "+game.getLevel());
+				}
+				game.loadLevel();
+				game.start();
+				System.out.println("running "+game.isRunning()+" completed "+game.isCompleted());
+				run();
+			}
+		};
+		gameTimer = new Timer(FREQ, listener);
+		gameTimer.start();
 	}
-	private static void delay() {
-		int numb=1;
-		for (int i = 0; i < 1000; i++) {
-			numb=numb*i*i;
-		}
-
-	}
-
-
+	
+	
+	
+	
 }

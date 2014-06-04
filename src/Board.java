@@ -87,6 +87,14 @@ public void addEnemy(Enemy gameObj) {
 	enemies.add(gameObj);
 	
 }
+public void reset() {
+	board=new GameObject[BLOCKNUMBER][BLOCKNUMBER];
+	enemies=new ArrayList<Enemy>();
+	bombs=new ArrayList<Bomb>();
+	fires=new ArrayList<Fire>();
+	allEnemiesRemoved=false;
+	
+}
 
 
 }

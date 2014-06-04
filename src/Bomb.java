@@ -74,14 +74,14 @@ public class Bomb extends GameObject{
 		if(counter>=MAXTIME){
 			
 			gamePanel.board.fires.add(new Fire(x,y,this.range,gamePanel));//add fire to board
-			System.out.println("explode at "+this.x+" "+this.y);
+			//System.out.println("explode at "+this.x+" "+this.y);
 			this.removed=true;
 			
 		}
 		else{
 			if(colisionWithFire()){
 				gamePanel.board.fires.add(new Fire(x,y,this.range,gamePanel));//add fire to board
-				System.out.println("explode at "+this.x+" "+this.y);
+				//System.out.println("explode at "+this.x+" "+this.y);
 				this.removed=true;
 			}
 			else{
