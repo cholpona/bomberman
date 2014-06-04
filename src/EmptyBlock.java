@@ -7,11 +7,6 @@ public class EmptyBlock extends BlockState{
 	public EmptyBlock(){
 		color=color.GRAY;
 	}
-	@Override
-	void playerOnMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	Color getColor() {

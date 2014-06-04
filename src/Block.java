@@ -7,14 +7,14 @@ public class Block extends GameObject{
 		super(x,y,Color.GRAY);
 		this.state=new EmptyBlock();
 	}
-	
+
 	public void changeState(BlockState state) {
 		this.state=state;
 	}
 
 	@Override
 	public boolean burnable() {
-				return this.state.burnable();
+		return this.state.burnable();
 	}
 	@Override
 	public boolean solid() {
@@ -23,10 +23,10 @@ public class Block extends GameObject{
 
 	@Override
 	public void draw(Graphics g) {
-			g.setColor(state.getColor());
-	        g.fillRect(x*20, y*20, SIZE, SIZE);
+		g.setColor(state.getColor());
+		g.fillRect(x*20, y*20, SIZE, SIZE);
 	}
-	
+
 	public void changeStateTo(char ch){
 		if(ch=='s'){
 			this.changeState(new SoftBlock());

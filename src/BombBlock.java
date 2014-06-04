@@ -11,12 +11,6 @@ public class BombBlock extends BlockState{
 	}
 
 	@Override
-	void playerOnMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	Color getColor() {
 		return color;
 	}

@@ -6,12 +6,6 @@ public class FireState extends BlockState{
 	public FireState(){
 		this.color=color.orange;
 	}
-	@Override
-	void playerOnMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	@Override
 	Color getColor() {

@@ -6,13 +6,6 @@ public class SoftBlock extends BlockState{
 	public SoftBlock(){
 		this.color=color.gray.darker();
 	}
-
-	@Override
-	void playerOnMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	Color getColor() {
 		return color;
@@ -30,6 +23,6 @@ public class SoftBlock extends BlockState{
 		return true;
 	}
 
-	
-	
+
+
 }

@@ -3,7 +3,7 @@ import java.awt.Graphics;
 
 
 public class Fire extends GameObject {
-	public static final int MAXTIME_FIRE=15;
+	public static final int MAXTIME_FIRE=7;
 	public int range;
 	private int rightFireable;
 	private int r;
@@ -25,85 +25,50 @@ public class Fire extends GameObject {
 		this.u=-1;
 		this.d=-1;
 		this.range=range;
-		
 		this.counter=0;
 		this.removed=false;
 		this.gamePanel=gamePanel;
 	}
 
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "fire";
-	}
-
-	@Override
-	public void changeState(BlockState state) {
-		// TODO Auto-generated method stub
-
-	}
-
 	@Override
 	public boolean burnable() {
-
 		return true;
 	}
 
 	@Override
-	public void draw(Graphics g) {
-
-
-
-
+	public boolean solid() {
+		return false;
 	}
+
 	public void update(){
 		if(counter>=MAXTIME_FIRE){
 			this.removed=true;
-			gamePanel.board.board[x][y].changeState(new EmptyBlock());
-					
-			for(int i = 1; i <= range; i++) {//the same as fire need to make a method with state
-				if(r>=i||rightFireable>=i){
-					if(x+i<gamePanel.board.board.length-1){
-					gamePanel.board.board[x+i][y].changeState(new EmptyBlock());}
-						}
-				if(l >= i || leftFireable >= i){
-					if(x-i>0){
-					gamePanel.board.board[x-i][y].changeState(new EmptyBlock());}
-				}
-				if(d >= i || downFireable >= i){ 
-					if(y+i<gamePanel.board.board.length-1){
-					gamePanel.board.board[x][y+i].changeState(new EmptyBlock());}
-				}
-				if(u >= i || upFireable >= i){
-					if(y-i>0){
-					gamePanel.board.board[x][y-i].changeState(new EmptyBlock());}
-				}
-	}}
+			changeFiredTo(new EmptyBlock());
+		}
 		else{
-
+			counter++;
 			for(int i = 1; i <= range; i++) {
 				if(r == -1) {
-					if(x+i<gamePanel.board.board.length-1){
-					if(gamePanel.board.board[x+i][y].solid()) r = i - 1;
-					if(gamePanel.board.board[x+i][y].burnable()) rightFireable = i;
+					if(x+i<Board.BLOCKNUMBER-1){
+						if(gamePanel.board.board[x+i][y].solid()) r = i - 1;
+						if(gamePanel.board.board[x+i][y].burnable()) rightFireable = i;
 					}
 				}
 				if(l == -1) {
 					if(x-i>0){
-					if(gamePanel.board.board[x-i][y].solid()) l = i - 1;
-					if(gamePanel.board.board[x-i][y].burnable()) leftFireable = i;
+						if(gamePanel.board.board[x-i][y].solid()) l = i - 1;
+						if(gamePanel.board.board[x-i][y].burnable()) leftFireable = i;
 					}
 				}
 				if(d == -1) {
-					if(y+i<gamePanel.board.board.length-1){
-					if(gamePanel.board.board[x][y+i].solid()) d = i - 1;
-					if(gamePanel.board.board[x][y+i].burnable()) downFireable = i;}
+					if(y+i<Board.BLOCKNUMBER-1){
+						if(gamePanel.board.board[x][y+i].solid()) d = i - 1;
+						if(gamePanel.board.board[x][y+i].burnable()) downFireable = i;}
 				}
 				if(u == -1) {
 					if(y-1>0){
-					if(gamePanel.board.board[x][y-i].solid()) u = i - 1;
-					if(gamePanel.board.board[x][y-i].burnable()) upFireable = i;}
+						if(gamePanel.board.board[x][y-i].solid()) u = i - 1;
+						if(gamePanel.board.board[x][y-i].burnable()) upFireable = i;}
 				}
 
 				if(i == range) {
@@ -114,29 +79,32 @@ public class Fire extends GameObject {
 				}
 			}
 
-			gamePanel.board.board[x][y].changeState(new FireState());
-			for(int i = 1; i <= range; i++) {
-				if(r>=i||rightFireable>=i){
-					if(x+i<gamePanel.board.board.length-1){
-					gamePanel.board.board[x+i][y].changeState(new FireState());}
-						}
-				if(l >= i || leftFireable >= i){
-					if(x-i>0){
-					gamePanel.board.board[x-i][y].changeState(new FireState());}
-				}
-				if(d >= i || downFireable >= i){ 
-					if(y+i<gamePanel.board.board.length-1){
-					gamePanel.board.board[x][y+i].changeState(new FireState());}
-				}
-				if(u >= i || upFireable >= i){
-					if(y-i>0){
-					gamePanel.board.board[x][y-i].changeState(new FireState());}
-				}
+			changeFiredTo(new FireState());
+		}
+
+	}
 
 
-				counter++;
-			}}
-
+	private void changeFiredTo(BlockState state) {
+		gamePanel.board.board[x][y].changeState(state);		
+		for(int i = 1; i <= range; i++) {
+			if(r>=i||rightFireable>=i){
+				if(x+i<Board.BLOCKNUMBER-1){
+					gamePanel.board.board[x+i][y].changeState(state);}
+			}
+			if(l >= i || leftFireable >= i){
+				if(x-i>0){
+					gamePanel.board.board[x-i][y].changeState(state);}
+			}
+			if(d >= i || downFireable >= i){ 
+				if(y+i<Board.BLOCKNUMBER-1){
+					gamePanel.board.board[x][y+i].changeState(state);}
+			}
+			if(u >= i || upFireable >= i){
+				if(y-i>0){
+					gamePanel.board.board[x][y-i].changeState(state);}
+			}
+		}
 	}
 
 	public boolean fireCollisionAt(int x, int y){
@@ -147,37 +115,36 @@ public class Fire extends GameObject {
 		for(int i = 1; i <= range; i++) {
 			if(r>=i||rightFireable>=i){
 				if(x+i<Board.BLOCKNUMBER){
-				if(x==this.x+i&&y==this.y){
-					return true;
-				}}
+					if(x==this.x+i&&y==this.y){
+						return true;
+					}}
 			}
 			if(l >= i || leftFireable >= i){
 				if(x-i>0){
-				if(x==this.x-i&&y==this.y){
-					return true;
-				}}
+					if(x==this.x-i&&y==this.y){
+						return true;
+					}}
 			}
 			if(d >= i || downFireable >= i){ 
 				if(y+i<Board.BLOCKNUMBER){
-				if(x==this.x&&y==this.y+i){
-					return true;
-				}}
+					if(x==this.x&&y==this.y+i){
+						return true;
+					}}
 			}
 			if(u >= i || upFireable >= i){
 				if(y-i>0){
-				if(x==this.x&&y==this.y-i){
-					return true;
-				}}
+					if(x==this.x&&y==this.y-i){
+						return true;
+					}}
 			}
 		}
 		return false;
 	}
 
+	@Override
+	public void changeState(BlockState state) {}
 
 	@Override
-	public boolean solid() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public void draw(Graphics g) {}
 
 }

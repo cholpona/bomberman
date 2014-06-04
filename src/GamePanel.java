@@ -74,7 +74,11 @@ public class GamePanel extends JPanel{
 	public void setBlockAt(int x, int y,Block block ){
 		board.setBlockBlockAt(x,y,block);
 	}
-
+	
+	public	Block getBlockAt(int x,int y){
+		return board.getBlockAt(x,y);
+	}
+	
 	public boolean isRunning(){
 		return this.running;
 	}

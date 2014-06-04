@@ -5,100 +5,98 @@ import java.util.ArrayList;
 
 
 public class Board {
-public static final int BLOCKNUMBER=GamePanel.HEIGHT/GameObject.SIZE;
-GameObject[][] board=new GameObject[BLOCKNUMBER][BLOCKNUMBER];
-public ArrayList<Bomb> bombs;
-public ArrayList<Enemy> enemies;
-public ArrayList<Fire> fires;
-public boolean allEnemiesRemoved;
+	public static final int BLOCKNUMBER=GamePanel.HEIGHT/GameObject.SIZE;
+	GameObject[][] board;
+	public ArrayList<Bomb> bombs;
+	public ArrayList<Enemy> enemies;
+	public ArrayList<Fire> fires;
+	public boolean allEnemiesRemoved;
 
-
-
-public Board(){
-	for (int i = 0; i < BLOCKNUMBER; i++) {
-		for (int j = 0; j < BLOCKNUMBER; j++) {
-			board[i][j]=new Block(i,j);
+	public Board(){
+		board=	new GameObject[BLOCKNUMBER][BLOCKNUMBER];
+		for (int i = 0; i < BLOCKNUMBER; i++) {
+			for (int j = 0; j < BLOCKNUMBER; j++) {
+				board[i][j]=new Block(i,j);
+			}
 		}
+		enemies=new ArrayList<Enemy>();
+		bombs=new ArrayList<Bomb>();
+		fires=new ArrayList<Fire>();
+		allEnemiesRemoved=false;
 	}
-	enemies=new ArrayList<Enemy>();
-	bombs=new ArrayList<Bomb>();
-	fires=new ArrayList<Fire>();
-	allEnemiesRemoved=false;
-	//board[2][2].changeState(new HardBlock());
-	//board[3][3].changeState(new SoftBlock());
-	
-	
-}
-public String toString(){
-	String str="";
-	for (int i = 0; i < BLOCKNUMBER; i++) {
-		for (int j = 0; j < BLOCKNUMBER; j++) {
-			str=str+board[i][j].toString();
-		}
-		str=str+"\n";
-	}
-	return str;
-	
-}
-public void update() {
+
+	public void update() {
 		removeDiedEnemies();	
-		if(enemies.size()==0){
-			allEnemiesRemoved=true;
-		}
-			
-		for (int i = 0; i < fires.size(); i++) {
-			fires.get(i).update();//TODO is added in the right place
-		}
-		
-		for (int i = 0; i < bombs.size(); i++) {
-			bombs.get(i).update();
-			
-		}
+		updateFires();//TODO is added in the right place
+		updateBombs();
+		updateEnemies();
+	}
+
+	private void updateEnemies() {
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
 		}
-}
-private void removeDiedEnemies() {
-	for (int i = 0; i < enemies.size(); i++) {
+	}
+
+	private void updateBombs() {
+		for (int i = 0; i < bombs.size(); i++) {
+			bombs.get(i).update();
+		}
+	}
+
+	private void updateFires() {
+		for (int i = 0; i < fires.size(); i++) {
+			fires.get(i).update();
+		}
+	}
+	private void removeDiedEnemies() {
+		for (int i = 0; i < enemies.size(); i++) {
 			if(!(enemies.get(i).isAlive)){
 				enemies.remove(i);
 			}
-	}
-	
-}
-public void draw(Graphics g) {
-	
-	for (int i = 0; i < BLOCKNUMBER; i++) {
-		for (int j = 0; j < BLOCKNUMBER; j++) {
-			board[i][j].draw(g);
 		}
-	}
-	for (int i = 0; i < enemies.size(); i++) {
-		enemies.get(i).draw(g);
-		//System.out.println("enemi is drawn");
-	}
-	
-}
+		if(enemies.size()==0){
+			allEnemiesRemoved=true;
+		}
 
-public void readLevel(){
-	//TODO will read level from txt file
-}
-public void addEnemy(Enemy gameObj) {
-	enemies.add(gameObj);
+	}
+	public void draw(Graphics g) {
+		for (int i = 0; i < BLOCKNUMBER; i++) {
+			for (int j = 0; j < BLOCKNUMBER; j++) {
+				board[i][j].draw(g);
+			}
+		}
+		for (int i = 0; i < enemies.size(); i++) {
+			enemies.get(i).draw(g);
+		}
+
+	}
+
+	public void readLevel(){
+		//TODO will read level from txt file
+	}
 	
-}
-public void reset() {
-	board=new GameObject[BLOCKNUMBER][BLOCKNUMBER];
-	enemies=new ArrayList<Enemy>();
-	bombs=new ArrayList<Bomb>();
-	fires=new ArrayList<Fire>();
-	allEnemiesRemoved=false;
+	public void addEnemy(Enemy gameObj) {
+		enemies.add(gameObj);
+	}
 	
-}
-public void setBlockBlockAt(int x, int y, Block block) {
-	board[y][x]=block;
+	public void reset() {
+		board=new GameObject[BLOCKNUMBER][BLOCKNUMBER];
+		enemies=new ArrayList<Enemy>();
+		bombs=new ArrayList<Bomb>();
+		fires=new ArrayList<Fire>();
+		allEnemiesRemoved=false;
+
+	}
 	
-}
+	public void setBlockBlockAt(int x, int y, Block block) {
+		board[y][x]=block;
+	}
+
+	public Block getBlockAt(int x, int y) {
+		return (Block)board[x][y];
+		
+	}
 
 
 }

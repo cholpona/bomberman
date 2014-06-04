@@ -8,12 +8,6 @@ public class DoorBlock extends BlockState {
 		this.color=color.YELLOW;
 	}
 
-	@Override
-	void playerOnMe(Block block) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	@Override
 	Color getColor() {
