@@ -24,5 +24,9 @@ public class FireState extends BlockState{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	public String toString(){
+		return "FireState";
+		
+	}
 
 }

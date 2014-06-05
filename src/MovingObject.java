@@ -48,13 +48,11 @@ public MovingObject(int x, int y,Color color){
 	}
 	
 public boolean colisionWithFire() {//TODO copied from bomber to upper calss
-		
-		for (int i = 0; i <board.fires.size(); i++) {
-			if(board.fires.get(i).fireCollisionAt(this.getX(), this.getY())){
-				return true;
-			}
-		}
-		return false;
+	if(board.getBlockAt(x,y).state.toString().equals("FireState")){
+		return true;
+	}
+	return false;
+
 	}
 
 protected boolean canWalk() {//TODO direaction.canmove yapayim

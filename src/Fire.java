@@ -107,40 +107,6 @@ public class Fire extends GameObject {
 		}
 	}
 
-	public boolean fireCollisionAt(int x, int y){
-		if(this.x==x&&this.y==y){
-			return true;
-		}
-
-		for(int i = 1; i <= range; i++) {
-			if(r>=i||rightFireable>=i){
-				if(x+i<Board.BLOCKNUMBER){
-					if(x==this.x+i&&y==this.y){
-						return true;
-					}}
-			}
-			if(l >= i || leftFireable >= i){
-				if(x-i>0){
-					if(x==this.x-i&&y==this.y){
-						return true;
-					}}
-			}
-			if(d >= i || downFireable >= i){ 
-				if(y+i<Board.BLOCKNUMBER){
-					if(x==this.x&&y==this.y+i){
-						return true;
-					}}
-			}
-			if(u >= i || upFireable >= i){
-				if(y-i>0){
-					if(x==this.x&&y==this.y-i){
-						return true;
-					}}
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public void changeState(BlockState state) {}
 

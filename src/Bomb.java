@@ -55,12 +55,11 @@ public class Bomb extends GameObject{
 	}
 	
 	private boolean colisionWithFire() {//TODO copied from bomber to upper calss
-		for (int i = 0; i <board.fires.size(); i++) {
-			if(board.fires.get(i).fireCollisionAt(this.x, this.y)){
-				return true;
-			}
+		if(board.getBlockAt(x, y).state.toString().equals("FireState")){
+			return true;
 		}
 		return false;
+		
 	}
 
 	@Override
