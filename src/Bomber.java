@@ -9,12 +9,12 @@ public class Bomber extends MovingObject{
 	KeyboardHandler keyboardHandler;
 	boolean moving;
 
-	public Bomber(int x,int y, KeyboardHandler keyboardHandler, GamePanel gamePanel){
+	public Bomber(int x,int y, KeyboardHandler keyboardHandler, Board board){
 		super(x,y,Color.green);
 		this.keyboardHandler=keyboardHandler;	
 		this.moving=false;
 		this.speed=SPEED;
-		this.gamePanel=gamePanel;
+		this.board=board;
 	}
 
 	public void move(int xd, int yd) {
@@ -80,36 +80,36 @@ public class Bomber extends MovingObject{
 	}
 
 	private boolean BlockAvailable() {
-		for(int i = 0; i < gamePanel.board.bombs.size(); i++) {
-			if((x) == gamePanel.board.bombs.get(i).x &&(y) == gamePanel.board.bombs.get(i).y) return false;
+		for(int i = 0; i < board.bombs.size(); i++) {
+			if((x) == board.bombs.get(i).x &&(y) == board.bombs.get(i).y) return false;
 		}
 		return true;
 	}
 
 	private void putBomb() {
-		Bomb bomb = new Bomb(x, y, gamePanel.board, 3);
-		gamePanel.board.bombs.add(bomb);
-		gamePanel.board.board[x][y].changeState(new BombBlock());
+		Bomb bomb = new Bomb(x, y, board, 3);
+		board.bombs.add(bomb);
+		board.board[x][y].changeState(new BombBlock());
 	}
 
 	private boolean colisionWithEnemy() {		
-		for(int i = 0; i < gamePanel.board.enemies.size(); i++) {
-			if(x == gamePanel.board.enemies.get(i).x && y == gamePanel.board.enemies.get(i).y ) return true;
+		for(int i = 0; i < board.enemies.size(); i++) {
+			if(x == board.enemies.get(i).x && y == board.enemies.get(i).y ) return true;
 		}
 		return false;
 	}
 
 	private void updateBombsAndFires() {
-		for (int i = 0; i <gamePanel.board.bombs.size(); i++) {
-			if(gamePanel.board.bombs.get(i).removed){
-				gamePanel.board.board[gamePanel.board.bombs.get(i).x][gamePanel.board.bombs.get(i).y].changeState(new EmptyBlock());
-				gamePanel.board.bombs.remove(i);
+		for (int i = 0; i <board.bombs.size(); i++) {
+			if(board.bombs.get(i).removed){
+				board.board[board.bombs.get(i).x][board.bombs.get(i).y].changeState(new EmptyBlock());
+				board.bombs.remove(i);
 			}
 		}
-		for (int i = 0; i < gamePanel.board.fires.size(); i++) {
-			if(gamePanel.board.fires.get(i).removed){
-				gamePanel.board.board[gamePanel.board.fires.get(i).x][gamePanel.board.fires.get(i).y].changeState(new EmptyBlock());
-				gamePanel.board.fires.remove(i);
+		for (int i = 0; i < board.fires.size(); i++) {
+			if(board.fires.get(i).removed){
+				board.board[board.fires.get(i).x][board.fires.get(i).y].changeState(new EmptyBlock());
+				board.fires.remove(i);
 			}
 		}
 	}

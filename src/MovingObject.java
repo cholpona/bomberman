@@ -11,7 +11,7 @@ public class MovingObject extends GameObject{
 	public int dir;
 	public int speed;
 	public boolean isAlive;
-	public GamePanel gamePanel;
+	public Board board;
 	
 public MovingObject(int x, int y,Color color){
 	super(x,y,color);
@@ -45,8 +45,8 @@ public MovingObject(int x, int y,Color color){
 	
 public boolean colisionWithFire() {//TODO copied from bomber to upper calss
 		
-		for (int i = 0; i <gamePanel.board.fires.size(); i++) {
-			if(gamePanel.board.fires.get(i).fireCollisionAt(this.getX(), this.getY())){
+		for (int i = 0; i <board.fires.size(); i++) {
+			if(board.fires.get(i).fireCollisionAt(this.getX(), this.getY())){
 				return true;
 			}
 		}
@@ -56,17 +56,17 @@ public boolean colisionWithFire() {//TODO copied from bomber to upper calss
 protected boolean canWalk() {//TODO direaction.canmove yapayim
 
 	if(dir==RIGHT){
-		return !gamePanel.board.board[x+1][y].solid();
+		return !board.board[x+1][y].solid();
 	}
 	else if(dir==DOWN){
-		return !gamePanel.board.board[x][y+1].solid();
+		return !board.board[x][y+1].solid();
 	}
 	else if(dir==UP){
-		return !gamePanel.board.board[x][y-1].solid();
+		return !board.board[x][y-1].solid();
 	}
 	else if(dir==LEFT){
 		if(x-1>0)
-			return !gamePanel.board.board[x-1][y].solid();
+			return !board.board[x-1][y].solid();
 	}
 	
 	return false;

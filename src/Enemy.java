@@ -8,9 +8,9 @@ public class Enemy extends MovingObject{
 	static final int FREQUENCY=5;
 	Random randomDir;
 	int count;
-	public Enemy(int x ,int y,GamePanel gamePanel){
+	public Enemy(int x ,int y,Board board){
 		super(x,y,Color.pink);
-		this.gamePanel=gamePanel;
+		this.board=board;
 		count=0;
 		randomDir=new Random();
 		this.dir=LEFT;

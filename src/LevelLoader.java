@@ -16,6 +16,7 @@ public class LevelLoader {
 	public void loadLevel(int x){
 		readLevel(x);
 		loadLevel();
+		start();
 	}
 	
 
@@ -45,7 +46,7 @@ public class LevelLoader {
 				Block block=new Block(j,i);
 				currChar=row.charAt(j);
 				 if(currChar=='e'){
-					Enemy enemy=new Enemy(j,i, game);
+					Enemy enemy=new Enemy(j,i, game.board);
 					game.addEnemy(enemy);
 				}
 				 else {
@@ -55,5 +56,14 @@ public class LevelLoader {
 			}
 		}
 	}
+	
+
+
+	public void start(){
+		game.setRunning(true);
+		game.setCompleted(false);
+		System.out.println("level "+ " is started");
+	}
+
 }
 
