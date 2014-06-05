@@ -41,9 +41,10 @@ public class BomberGame extends JPanel{
 		setSize(HEIGHT+20, WIDTH+40);
 		setVisible(true);
 		board=new Board();
-		keyboardHandler=new KeyboardHandler();
-		addKeyListener(keyboardHandler);
+		
 		this.bomber =new Bomber(1,1,keyboardHandler,board);
+		keyboardHandler=new KeyboardHandler(bomber);
+		addKeyListener(keyboardHandler);
 		this.running=false;
 		this.completed=true;
 		this.levelNo=1;
@@ -103,7 +104,6 @@ public class BomberGame extends JPanel{
 	void update() {
 		if(bomber.isAlive){
 			if(!board.allEnemiesRemoved){
-				keyboardHandler.update();//update Keyboard
 				board.update();
 				bomber.update();
 				draw();}

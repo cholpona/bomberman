@@ -17,26 +17,9 @@ public class Enemy extends MovingObject{
 		this.count=0;
 	}
 
-	public void move(int xa, int ya) {//TODO template method
-		if(xa != 0 && ya != 0) {
-			move(xa, 0);
-			move(0, ya);
-			return;
-		}
-		//is this neccessary?
-		if(xa > 0) dir = RIGHT;
-		if(xa < 0) dir = LEFT;
-		if(ya > 0) dir = DOWN;
-		if(ya < 0) dir = UP;
-		//check whether reachable
-		if(canWalk()){
-			this.setX(this.getX()+xa);
-			this.setY(this.getY()+ya);
-		}
-		else{
-			changeDirection();
-			moveForwad();
-		}
+	public void moveOtherwise(){
+		changeDirection();
+		moveForwad();
 	}
 
 	private void changeDirection() {
@@ -49,19 +32,21 @@ public class Enemy extends MovingObject{
 		}	
 	}
 
-	private void moveForwad() {//TODO try to make an analogy of state
+	private void moveForwad() {//TODO try to use goleft
 		if(dir==RIGHT){
-			move(1,0);
+			goRight();
 		}
 		else if(dir==LEFT){
-			move(-1,0);
+			goLeft();
 		}
 		else if(dir==UP){
-			move(0,-1);
+			goUp();
 		}
 		else if(dir==DOWN){
-			move(0,1);
+			goDown();
 		}
+		
+		move(xd, yd);
 
 	}
 

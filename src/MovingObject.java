@@ -12,10 +12,14 @@ public class MovingObject extends GameObject{
 	public int speed;
 	public boolean isAlive;
 	public Board board;
+	public int xd,yd;//horizontal vertical displacements
 	
 public MovingObject(int x, int y,Color color){
 	super(x,y,color);
 	this.isAlive=true;
+	this.speed=1;
+	this.xd=0;
+	this.yd=0;
 	
 }
 	
@@ -71,6 +75,72 @@ protected boolean canWalk() {//TODO direaction.canmove yapayim
 	
 	return false;
 }
+public void goRight() {
+	yd=0;
+	xd = speed;
+}
+
+public void goLeft() {
+	yd=0;
+	xd = -speed;
+}
+
+public void goUp() {
+	xd=0;
+	yd = -speed;
+}
+
+public void goDown() {
+	xd=0;
+	yd = speed;
+}
+public void stopRight() {
+	if (xd > 0) {
+		xd = 0;
+	}
+}
+
+public void stopLeft() {
+	if (xd < 0) {
+		xd = 0;
+	}
+}
+public void stopUp() {
+	if (yd < 0) {
+		yd = 0;
+	}
+}
+
+public void stopDown() {
+	if (yd > 0) {
+		yd = 0;
+	}
+}
+
+public void move(int xd, int yd) {
+	if(xd != 0 && yd != 0) {
+		move(xd, 0);
+		move(0, yd);
+		return;
+	}
+
+	if(xd > 0) dir = RIGHT;
+	if(xd < 0) dir = LEFT;
+	if(yd > 0) dir = DOWN;
+	if(yd < 0) dir = UP;
+	//check whether next block walkable
+	if(canWalk()){
+		this.setX(this.getX()+xd);
+		this.setY(this.getY()+yd);	
+	}
+	else{
+		moveOtherwise();
+	}
+}
+
+public  void moveOtherwise(){}
+
+
 
 
 

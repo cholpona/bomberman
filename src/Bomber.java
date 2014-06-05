@@ -14,56 +14,12 @@ public class Bomber extends MovingObject{
 		this.speed=SPEED;
 		this.board=board;
 	}
-
-	public void move(int xd, int yd) {
-		if(xd != 0 && yd != 0) {
-			move(xd, 0);
-			move(0, yd);
-			return;
-		}
-
-		if(xd > 0) dir = RIGHT;
-		if(xd < 0) dir = LEFT;
-		if(yd > 0) dir = DOWN;
-		if(yd < 0) dir = UP;
-		//check whether next block walkable
-		if(canWalk()){
-			this.setX(this.getX()+xd);
-			this.setY(this.getY()+yd);	
-		}
-	}
-
-
 	public void update() {
-		int xd=0;
-		int yd=0;
-		if(keyboardHandler.up){
-			//System.out.println("called up");
-			yd=yd-speed;
-		}
-		if(keyboardHandler.down){
-			//System.out.println("called down");
-			yd=yd+speed;
-		}
-		if(keyboardHandler.right){
-			//System.out.println("called right");
-			xd=xd+speed;
-		}
-		if(keyboardHandler.left){
-			xd=xd-speed;
-		}
-		if(keyboardHandler.space){
-			if(BlockAvailable()){
-				putBomb();
-				//System.out.println("bomb is planted at "+this.x+" "+this.y);
-			}
-		}
+		
 		if(xd!=0||yd!=0){
 			move(xd,yd);
 		}
-		else{
-			
-		}
+		
 		updateBombsAndFires();// TODO niye burda niye bombs da deil?
 		//colision with enemy
 		if(colisionWithEnemy()){
@@ -74,6 +30,7 @@ public class Bomber extends MovingObject{
 			isAlive=false;
 			System.out.println("you died");
 		}
+		
 	}
 
 	private boolean BlockAvailable() {
@@ -83,10 +40,11 @@ public class Bomber extends MovingObject{
 		return true;
 	}
 
-	private void putBomb() {
+	void putBomb() {
+		if(BlockAvailable()){
 		Bomb bomb = new Bomb(x, y, board, 3);
 		board.bombs.add(bomb);
-		board.board[x][y].changeState(new BombBlock());
+		board.board[x][y].changeState(new BombBlock());}
 	}
 
 	private boolean colisionWithEnemy() {		
