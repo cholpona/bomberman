@@ -19,15 +19,12 @@ public class Fire extends GameObject {
 	public Board board;
 
 	public Fire(int x, int y, int range,Board board){
-		super(x,y,Color.orange);
-		this.r=-1;
-		this.l=-1;
-		this.u=-1;
-		this.d=-1;
+		super(x,y,Color.orange,board,false);
 		this.range=range;
 		this.counter=0;
 		this.removed=false;
 		this.board=board;
+		board.getBlockAt(x, y).spreadFireAt(x,y,range);
 	}
 
 	@Override
@@ -43,46 +40,15 @@ public class Fire extends GameObject {
 	public void update(){
 		if(counter>=MAXTIME_FIRE){
 			this.removed=true;
-			changeFiredTo(new EmptyBlock());
+			board.getBlockAt(x,y).closeFireAt(x,y,range);
 		}
 		else{
+		
 			counter++;
-			for(int i = 1; i <= range; i++) {
-				if(r == -1) {
-					if(x+i<Board.BLOCKNUMBER-1){
-						if(board.board[x+i][y].solid()) r = i - 1;
-						if(board.board[x+i][y].burnable()) rightFireable = i;
-					}
-				}
-				if(l == -1) {
-					if(x-i>0){
-						if(board.board[x-i][y].solid()) l = i - 1;
-						if(board.board[x-i][y].burnable()) leftFireable = i;
-					}
-				}
-				if(d == -1) {
-					if(y+i<Board.BLOCKNUMBER-1){
-						if(board.board[x][y+i].solid()) d = i - 1;
-						if(board.board[x][y+i].burnable()) downFireable = i;}
-				}
-				if(u == -1) {
-					if(y-1>0){
-						if(board.board[x][y-i].solid()) u = i - 1;
-						if(board.board[x][y-i].burnable()) upFireable = i;}
-				}
-
-				if(i == range) {
-					if(r == -1) r = i;
-					if(l == -1) l = i;
-					if(d == -1) d = i;
-					if(u == -1) u = i;
-				}
-			}
-
-			changeFiredTo(new FireState());
 		}
 
 	}
+
 
 
 	private void changeFiredTo(BlockState state) {

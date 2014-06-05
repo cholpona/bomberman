@@ -43,12 +43,16 @@ public class LevelLoader {
 		for (int i = 0; i < Board.BLOCKNUMBER; i++) {
 			String row=levelMap[i];
 			for (int j = 0; j < Board.BLOCKNUMBER; j++) {
-				Block block=new Block(j,i);
+				Block block=new Block(j,i,game.board);
 				currChar=row.charAt(j);
 				 if(currChar=='e'){
 					Enemy enemy=new Enemy(j,i, game.board);
 					game.addEnemy(enemy);
 				}
+				 else if(currChar=='b'){
+					 game.bomber.setX(j);
+					 game.bomber.setY(i);
+				 }
 				 else {
 					 block.changeStateTo(currChar);
 				 }

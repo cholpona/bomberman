@@ -5,16 +5,19 @@ import java.util.Random;
 
 public class Enemy extends MovingObject{
 	int freq=10;
-	static final int FREQUENCY=5;
+	int frequency=5;
 	Random randomDir;
 	int count;
 	public Enemy(int x ,int y,Board board){
-		super(x,y,Color.pink);
+		super(x,y,Color.pink,board);
 		this.board=board;
 		count=0;
 		randomDir=new Random();
 		this.dir=LEFT;
 		this.count=0;
+		this.speed=1;
+		this.frequency=randomDir.nextInt(7)+1;
+		System.out.println(this.frequency);
 	}
 
 	public void moveOtherwise(){
@@ -56,7 +59,7 @@ public class Enemy extends MovingObject{
 				isAlive=false;
 			}
 			else{	
-				if(count>FREQUENCY){
+				if(count>frequency){
 					moveForwad();	
 					count=0;
 				}		

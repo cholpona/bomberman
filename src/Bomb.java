@@ -8,7 +8,7 @@ public class Bomb extends GameObject{
 	public static final int MAXTIME=20;
 	public int counter;
 	public Bomb(int x, int y, Board board, int range){
-		super(x,y,Color.black);
+		super(x,y,Color.black,board,false);
 		removed=false;
 		this.board=board;
 		this.range=range;

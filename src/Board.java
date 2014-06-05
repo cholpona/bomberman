@@ -17,7 +17,7 @@ public class Board {
 		board=	new GameObject[BLOCKNUMBER][BLOCKNUMBER];
 		for (int i = 0; i < BLOCKNUMBER; i++) {
 			for (int j = 0; j < BLOCKNUMBER; j++) {
-				board[i][j]=new Block(i,j);
+				board[i][j]=new Block(i,j,this);
 			}
 		}
 		enemies=new ArrayList<Enemy>();
@@ -31,6 +31,8 @@ public class Board {
 		updateFires();//TODO is added in the right place
 		updateBombs();
 		updateEnemies();
+		removedDiedBombsAndFires();
+		
 	}
 
 	private void updateEnemies() {
@@ -97,6 +99,20 @@ public class Board {
 	public Block getBlockAt(int x, int y) {
 		return (Block)board[x][y];
 		
+	}
+	private void removedDiedBombsAndFires() {
+		for (int i = 0; i <bombs.size(); i++) {
+			if(bombs.get(i).removed){
+				//board.board[board.bombs.get(i).x][board.bombs.get(i).y].changeState(new EmptyBlock());
+				bombs.remove(i);
+			}
+		}
+		for (int i = 0; i < fires.size(); i++) {
+			if(fires.get(i).removed){
+				//board.board[board.fires.get(i).x][board.fires.get(i).y].changeState(new EmptyBlock());
+				fires.remove(i);
+			}
+		}
 	}
 
 

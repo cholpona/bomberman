@@ -14,12 +14,13 @@ public class MovingObject extends GameObject{
 	public Board board;
 	public int xd,yd;//horizontal vertical displacements
 	
-public MovingObject(int x, int y,Color color){
-	super(x,y,color);
+public MovingObject(int x, int y,Color color,Board board){
+	super(x,y,color,board,true);
 	this.isAlive=true;
 	this.speed=1;
 	this.xd=0;
 	this.yd=0;
+	this.removed=false;
 	
 }
 	

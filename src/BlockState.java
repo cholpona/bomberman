@@ -5,6 +5,10 @@ import java.awt.Graphics;
 public abstract  class BlockState {
 	abstract Color getColor();
 	public abstract boolean burnable();
-	public abstract boolean solid();	
+	public abstract boolean solid();
+	
+	public String toString(){
+		return"";
+	}
 }
 

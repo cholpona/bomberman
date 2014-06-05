@@ -10,11 +10,16 @@ public abstract  class GameObject{
 	Picture picture;
 	Color color;
 	BlockState state;
+	Board board;
+	public boolean isAlive;
+	public boolean removed;
 	
-	public GameObject(int x,int y, Color color){
+	public GameObject(int x,int y, Color color,Board board,boolean isAlive){
 		this.x=x;
 		this.y=y;
 		this.color=color;
+		this.board=board;
+		this.isAlive=isAlive;
 	}
 	public void setX(int x){
 		this.x=x;
@@ -41,6 +46,10 @@ public abstract  class GameObject{
 	
 	
 	public void changeState(BlockState state){//TODO check this
+	}
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 		

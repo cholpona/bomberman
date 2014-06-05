@@ -11,3 +11,8 @@ OR should I make it as in SpaceInvaders?
 
 Note:
 If I want the bomb to be oval I need to check the if the tostring of the block is equal to the "bomb block" and then make it gray and make the oval inside the grect
+Make a updateIterator(list){
+for(){
+e.update();
+}
+}
