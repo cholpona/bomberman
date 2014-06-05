@@ -72,4 +72,6 @@ protected boolean canWalk() {//TODO direaction.canmove yapayim
 	return false;
 }
 
+
+
 }

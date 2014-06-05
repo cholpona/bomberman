@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 
 public class Board {
-	public static final int BLOCKNUMBER=GamePanel.HEIGHT/GameObject.SIZE;
+	
+	public static final int BLOCKNUMBER=BomberGame.HEIGHT/GameObject.SIZE;
 	GameObject[][] board;
 	public ArrayList<Bomb> bombs;
 	public ArrayList<Enemy> enemies;

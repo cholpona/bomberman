@@ -17,7 +17,7 @@ public class Enemy extends MovingObject{
 		this.count=0;
 	}
 
-	public void move(int xa, int ya) {
+	public void move(int xa, int ya) {//TODO template method
 		if(xa != 0 && ya != 0) {
 			move(xa, 0);
 			move(0, ya);

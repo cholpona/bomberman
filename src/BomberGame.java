@@ -1,39 +1,54 @@
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
 
 
-public class BomberGame extends JFrame{
-	static final int MAX_LEVEL=3;
+public class BomberGame extends JPanel{
 	static final int FREQ=60;
 	public static final int LASTLEVEL=2;
+	public static final int WIDTH=500;
+	public static final int HEIGHT=500;
 	private int levelNo;
-	private GamePanel game;
 	private Timer gameTimer;
 	private LevelLoader levelLoader;
+	private boolean completed;
+	private  boolean running;
+	Bomber bomber;
+	public Board board;
+	private KeyboardHandler keyboardHandler;
 
 	public static void main(String[] args) {
 		BomberGame bomberGame=new BomberGame();
+		JFrame frame=new JFrame();
+		frame.setLayout(new BorderLayout());
+		frame.setSize(bomberGame.getSize());      
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(bomberGame, BorderLayout.CENTER);
+		frame.setVisible(true);
 	}
 
 	public BomberGame(){
-		setLayout(new BorderLayout());
-		setSize(520, 540); //      
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		game = new GamePanel();
-		levelLoader=new LevelLoader(game);
-		this.levelNo=1;
-		levelLoader.loadLevel(levelNo);
-		add(game, BorderLayout.CENTER);
+		setSize(HEIGHT+20, WIDTH+40);
 		setVisible(true);
+		board=new Board();
+		keyboardHandler=new KeyboardHandler();
+		addKeyListener(keyboardHandler);
+		this.bomber =new Bomber(1,1,keyboardHandler,board);
+		this.running=false;
+		this.completed=true;
+		this.levelNo=1;
+		levelLoader=new LevelLoader(this);
+		levelLoader.loadLevel(levelNo);
 		run();
 	}
 
@@ -41,12 +56,12 @@ public class BomberGame extends JFrame{
 		ActionListener listener = new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.requestFocusInWindow();
-				if (game.isRunning()) {
-					game.update();
+				requestFocusInWindow();
+				if (running) {
+					update();
 				} else {
 					gameTimer.stop();
-					if(game.isCompleted()){
+					if(completed){
 						if(nextLevelExist()){
 							levelNo++;
 							levelLoader.loadLevel(levelNo);
@@ -80,4 +95,54 @@ public class BomberGame extends JFrame{
 		}
 		else return false;
 	}
+
+	private void draw() {
+		repaint();
+	}
+
+	void update() {
+		if(bomber.isAlive){
+			if(!board.allEnemiesRemoved){
+				keyboardHandler.update();//update Keyboard
+				board.update();
+				bomber.update();
+				draw();}
+			else{
+				this.running=false;
+				this.completed=true;
+			}
+		}
+		else{
+			this.running=false;
+			this.completed=false;
+		}
+	}
+
+	
+
+	public void addEnemy(Enemy gameObj) {
+		board.addEnemy(gameObj);
+	}
+
+	public void setBlockAt(int x, int y,Block block ){
+		board.setBlockBlockAt(x,y,block);
+	}
+
+	public	Block getBlockAt(int x,int y){
+		return board.getBlockAt(x,y);
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+	
+	public void paint(Graphics g) {
+		super.paint(g);
+		board.draw(g);
+		bomber.draw(g);
+	}
+
 }

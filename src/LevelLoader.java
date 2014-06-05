@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 
 public class LevelLoader {
-	GamePanel game;
+	BomberGame game;
 	
 	private String levelInStr;
-	public LevelLoader(GamePanel game){
+	public LevelLoader(BomberGame game){
 		this.game=game;
 	}
 	public void loadLevel(int x){

@@ -7,12 +7,10 @@ import java.awt.Graphics;
 
 public class Bomber extends MovingObject{
 	KeyboardHandler keyboardHandler;
-	boolean moving;
-
+	
 	public Bomber(int x,int y, KeyboardHandler keyboardHandler, Board board){
 		super(x,y,Color.green);
 		this.keyboardHandler=keyboardHandler;	
-		this.moving=false;
 		this.speed=SPEED;
 		this.board=board;
 	}
@@ -61,11 +59,10 @@ public class Bomber extends MovingObject{
 			}
 		}
 		if(xd!=0||yd!=0){
-			moving=true;
 			move(xd,yd);
 		}
 		else{
-			moving=false;
+			
 		}
 		updateBombsAndFires();// TODO niye burda niye bombs da deil?
 		//colision with enemy
