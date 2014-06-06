@@ -15,7 +15,7 @@ import javax.swing.Timer;
 
 public class BomberGame extends JPanel{
 	static final int FREQ=60;
-	public static final int LASTLEVEL=2;
+	public static final int LASTLEVEL=3;
 	public static final int WIDTH=500;
 	public static final int HEIGHT=500;
 	private int levelNo;

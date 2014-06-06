@@ -46,12 +46,18 @@ public class Block extends GameObject{
 		board.getBlockAt(x-1, y).sendFireLeft(range);
 		board.getBlockAt(x, y-1).sendFireUp(range);
 	}
+	
+	public void closeFireAt(int x, int y, int range) {
+		changeState(new EmptyBlock());
+		board.getBlockAt(x,y+1).sendCloseFireDown(range);
+		board.getBlockAt(x+1, y).sendCloseFireRight(range);
+		board.getBlockAt(x-1, y).sendCloseFireLeft(range);
+		board.getBlockAt(x, y-1).sendCloseFireUp(range);
+	}
 
-	private void sendFireUp(int range) {//template yapmaya calis
+	private void sendFireUp(int range) {
 		if(state.solid()){
-			if(state.burnable()){
-				changeState(new FireState());
-			}
+			burnSolid();
 		}
 		else{
 			changeState(new FireState());
@@ -62,11 +68,15 @@ public class Block extends GameObject{
 
 	}
 
+	private void burnSolid() {
+		if(state.burnable()){
+			changeState(new FireState());
+		}
+	}
+
 	private void sendFireLeft(int range) {
 		if(state.solid()){
-			if(state.burnable()){
-				changeState(new FireState());
-			}
+			burnSolid();
 		}
 		else{
 			changeState(new FireState());
@@ -79,9 +89,7 @@ public class Block extends GameObject{
 
 	private void sendFireRight(int range) {
 		if(state.solid()){
-			if(state.burnable()){
-				changeState(new FireState());
-			}
+			burnSolid();
 		}
 		else{
 			changeState(new FireState());
@@ -95,9 +103,7 @@ public class Block extends GameObject{
 
 	private void sendFireDown(int range) {
 		if(state.solid()){
-			if(state.burnable()){
-				changeState(new FireState());
-			}
+			burnSolid();
 		}
 		else{
 			changeState(new FireState());
@@ -109,15 +115,7 @@ public class Block extends GameObject{
 
 	}
 
-	public void closeFireAt(int x, int y, int range) {
-		changeState(new EmptyBlock());
-		board.getBlockAt(x,y+1).sendCloseFireDown(range);
-		board.getBlockAt(x+1, y).sendCloseFireRight(range);
-		board.getBlockAt(x-1, y).sendCloseFireLeft(range);
-		board.getBlockAt(x, y-1).sendCloseFireUp(range);
 
-
-	}
 
 	private void sendCloseFireDown(int range) {
 		if(!state.solid()){

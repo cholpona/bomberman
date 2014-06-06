@@ -4,19 +4,20 @@ import java.util.Random;
 
 
 public class Enemy extends MovingObject{
+	static final int MAXSPEED=7;
 	int freq=10;
 	int frequency=5;
-	Random randomDir;
+	Random random;
 	int count;
 	public Enemy(int x ,int y,Board board){
 		super(x,y,Color.pink,board);
 		this.board=board;
 		count=0;
-		randomDir=new Random();
+		random=new Random();
 		this.dir=LEFT;
 		this.count=0;
 		this.speed=1;
-		this.frequency=randomDir.nextInt(7)+1;
+		this.frequency=random.nextInt(MAXSPEED)+1;
 		System.out.println(this.frequency);
 	}
 
@@ -26,7 +27,7 @@ public class Enemy extends MovingObject{
 	}
 
 	private void changeDirection() {
-		int nextDir=randomDir.nextInt(4);
+		int nextDir=random.nextInt(4);
 		if(nextDir+1==dir){
 			changeDirection();
 		}
